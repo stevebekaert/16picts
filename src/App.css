@@ -20,3 +20,20 @@
 .App-link {
   color: #09d3ac;
 }
+
+.row{
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+
+.col{
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.cell{
+  
+}
