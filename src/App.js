@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DrawingBoard from './DrawingBoard';
+import DrawingBoard from './DrawingBoard.js';
 import './App.css';
 
 class App extends Component {
@@ -7,9 +7,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      board: this.buildBoard(6)
+      board: this.buildBoard(20)
     }
-
   }
 
   buildBoard = (squareSize) => {
@@ -24,24 +23,27 @@ class App extends Component {
   
     // Classic way //
 
-    // let grid = [];
-    // for (let x = 0; x < squareSize; x++){
-    //   grid[x]= []
-    //   for (let y = 0; y <squareSize; y ++){
-    //     grid[x][y] = 0;
-    //   }
-    // }
-
-    let grid;
-    const ruler = new Array(squareSize).fill("1")
-
-    return ruler.map(x => ruler.map(y => 0))
-    // OU // return ruler.map(x => ruler.map(y => 0))
-    
+    let grid = [];
+    for (let x = 0; x < squareSize; x++){
+      grid[x]= []
+      for (let y = 0; y <squareSize; y ++){
+        grid[x][y] = 0;
+      }
     }
 
-    DrawBoard = (lat, lng) => {
-      let updatedBoard = this.updatedGrid(this.state.board, lat, lng)
+    // Best way //
+    // let grid;
+    // const ruler = new Array(squareSize).fill("1")
+
+    // return ruler.map(lat => ruler.map(lng => 0))
+    return grid
+   }
+
+    drawBoard = (lat, lng) => {
+      if (this.state.board[lat][lng]){
+        return
+      }
+      let updatedBoard = this.updateGrid(this.state.board, lat, lng)
       
       this.setState({
         board: updatedBoard
@@ -53,10 +55,10 @@ class App extends Component {
     }
     
     updateGrid = (grid, lat, lng) => {
-      let updatedGrid = [...grid];
-      updatedGrid[lat][lng] = 1;
+      let updateGrid = [...grid];
+      updateGrid[lat][lng] = 1;
 
-      return updatedGrid
+      return updateGrid
     }
 
   render(){
@@ -68,7 +70,7 @@ class App extends Component {
 
         <DrawingBoard
          board={board}
-         drawBoard={this.DrawBoard}
+         drawBoard={this.drawBoard}
          >
         </DrawingBoard>
         </div>

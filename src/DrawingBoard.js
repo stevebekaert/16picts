@@ -1,14 +1,14 @@
 import React from 'react'
 import Pix from './Pix.js'
 
-const DrawingBoard = ({board, DrawBoard}) =>
+const DrawingBoard = ({board, drawBoard}) =>
     <div className = 'board-canvas'>
         {board.map((row, x) => 
             <div className='row' key={x}>
-                {row.map((col, y) => 
+                {row.map((col,y) => 
                     <div className='col' key={x+y}>
                        <Pix
-                           DrawBoard={DrawBoard}
+                           drawBoard={drawBoard}
                            color={board[x][y]}
                            lat={x}
                            lng={y}

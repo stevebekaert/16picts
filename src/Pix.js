@@ -2,7 +2,7 @@ import React from 'react'
 
 const Pix = ({drawBoard, color, lat, lng}) =>
 <div className="cell"
-    onMouseMove={() => drawBoard()}
+    onMouseOver={() => drawBoard(lat, lng)}
     style ={{
         backgroundColor : !color ? 'inherit' : 'red'
     }}
