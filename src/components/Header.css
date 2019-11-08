@@ -1,7 +1,7 @@
 .heroHeader{
     background-image: linear-gradient( rgba(40, 69, 150, 0.3), rgba(40, 69, 150, 0.3)), url(../images/sky.png);
     background-size: cover;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
 }

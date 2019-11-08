@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { setInterval, clearInterval } from 'timers';
+
 import './Timer.css'
+
+
 
 class Timer extends Component {
     constructor(props){
@@ -72,5 +75,7 @@ class Timer extends Component {
         );
     }
 }
+
+
 
 export default Timer;
