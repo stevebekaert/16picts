@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import DrawingBoard from './DrawingBoard.js';
+import Timer from './Timer.js';
 import '../App.css';
 
 
-
-class Pictionary extends Component {
+class Game extends Component {
   constructor(props){
     super(props)
 
@@ -75,6 +75,7 @@ class Pictionary extends Component {
          drawBoard={this.drawBoard}
          >
         </DrawingBoard>
+        <Timer />
         </div>
         </div>
     </div>
@@ -83,4 +84,4 @@ class Pictionary extends Component {
 }
 
 
-export default Pictionary;
+export default Game;

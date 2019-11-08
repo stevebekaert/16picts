@@ -10,7 +10,7 @@ class Header extends Component{
         <div className="terrain">
         <ul className="buttonPlayAndJoinGameUl">
             {/* <li><NavLink activeClassName="active" exat to="/">Home</NavLink></li> */}
-            <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="/Pictionary" >Play</NavLink></li>
+            <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="/Game" >Play</NavLink></li>
             <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="/contact" >Join game</NavLink></li>
         </ul>
         </div>   

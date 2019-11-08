@@ -1,0 +1,28 @@
+.stop-off{
+    color: red;
+    background-color: orange;
+    border-radius: 3px;
+    padding: 3px;
+  }
+  
+  .stop-on{
+    color: black;
+    background-color: white;
+    border-radius: 3px;
+    padding: 3px;
+  }
+  
+  .timer-zone{
+    width: 500px;
+    height: 20px; 
+    border: 2px solid black;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .timer-completion{
+    height: 100%;
+    background-color: green;
+    width: 100%;
+    transition: width 1s linear;
+  }
