@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import DrawingBoard from './DrawingBoard.js';
+import DrawingBoard from './components/DrawingBoard.js';
 import './App.css';
+import Timer from './components/Timer';
 
 class App extends Component {
   constructor(props){
@@ -74,6 +75,7 @@ class App extends Component {
          >
         </DrawingBoard>
         </div>
+        <Timer />
       </header>
     </div>
   );
