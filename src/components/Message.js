@@ -10,26 +10,30 @@ class Message extends React.Component {
                 style={{display:"flex",
                         flexDirection: "column",
                         marginTop: "5px",
-                        position:"relative"}}>
+                        position:"relative",
+                        }}>
                 <div className="msg-date"
                     style={{
-                        fontSize: "0.6em"
+                        fontSize: "10px",
+                        alignSelf: this.props.sender === "myself" ? "start" : "end"
                     }}>{this.props.date}
                 </div>
                 <div className="msg-content"
                         style={{
                         wordBreak: "break-all",
-                        width: "100%",
-                        backgroundColor: "blue",
+                        width: "80%",
+                        backgroundColor:  this.props.sender === "myself" ? "green" : "blue",
                         borderRadius: "20px",
-                        padding: "5px"
+                        padding: "5px",
+                        fontSize: "12px",
+                        alignSelf: this.props.sender === "myself" ? "start" : "end"
                         }}>{this.props.content}
                 </div>
                 <div className="sender"
                     style={{
-                        fontSize: "0.6em",
-                        alignSelf: "end",
-                        right: "0"
+                        fontSize: "11px",
+                        right: "0",
+                        alignSelf: this.props.sender === "myself" ? "start" : "end"
                     }}>
                         {this.props.sender}
                 </div>
