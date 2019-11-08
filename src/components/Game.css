@@ -1,5 +1,5 @@
 .drawingBoard-chatBoard{
     display: flex;
-
+    width: 70vw;
     height: 500px;
 }

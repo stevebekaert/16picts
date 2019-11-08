@@ -7,37 +7,37 @@ import './GameBoard.css';
 
 
 class GameBoard extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      board: this.buildBoard(40),
-      isDrawing : false
+     constructor(props){
+       super(props)
+   
+       this.state = {
+         board: this.buildBoard(40),
+         isDrawing : false
+       }
+     }
+   
+    buildBoard = (squareSize) => {
+       let grid = [];
+       for (let x = 0; x < squareSize; x++){
+         grid[x]= []
+         for (let y = 0; y < squareSize; y++){
+           grid[x][y] = 0;
+         }
+       }
+   
+       return grid
     }
-  }
-  
-  buildBoard = (squareSize) => {
-    let grid = [];
-    for (let x = 0; x < squareSize; x++){
-      grid[x]= []
-      for (let y = 0; y < squareSize; y++){
-        grid[x][y] = 0;
-      }
+   
+    drawBoard = (lat, lng) => {
+       if (this.state.board[lat][lng] || !this.state.isDrawing){
+            return
+          }
+          let updatedBoard = this.updateGrid(this.state.board, lat, lng)
+          
+          this.setState({
+            board: updatedBoard
+          })
     }
-
-    return grid
-  }
-  
-  drawBoard = (lat, lng) => {
-    if (this.state.board[lat][lng]){
-      return
-    }
-    let updatedBoard = this.updateGrid(this.state.board, lat, lng)
-    
-    this.setState({
-      board: updatedBoard
-    })
-  }
         
   updateGrid = (grid, lat, lng) => {
     let updateGrid = [...grid];

@@ -19,7 +19,7 @@ class Ranking extends React.Component {
                 <div id="playersName">
                     {name}
                 </div>
-                <div id="plaersScore">
+                <div id="playersScore">
                     {this.state.score}
                     </div>>
             </div>
