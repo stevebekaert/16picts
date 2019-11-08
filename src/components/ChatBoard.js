@@ -6,7 +6,7 @@ class ChatBoard extends Component {
     state = {
         currentInput: '',
         isWriting: false,
-        messages: [{content: "Hello World"}]
+        messages: []
     }
 
     handleChange = (event) => {
@@ -18,25 +18,42 @@ class ChatBoard extends Component {
 
     handleSubmit = (event, messageToAdd) => {
         this.setState({ isWriting: false })
-        let newMessages = this.getNewMessages(messageToAdd);
-        this.setState({
-            messages: newMessages
-        })
-        event.preventDefault();   
-        this.setState({currentInput: ''})
+        if (this.state.currentInput !== '') {
+             let newMessages = this.getNewMessages();
+             this.setState({
+                 messages: newMessages
+             })
+             this.setState({currentInput: ''})
+            }
+            event.preventDefault();   
     }
 
-    getNewMessages = (messageToAdd) => {
-
+    getNewMessages = () => {
+        let newDate = new Date();
+        let newDateLocal = newDate.toLocaleString();
+        let from = this.whoTalk()
         let existingMessages  = this.state.messages;
-        let newMessage = { content:  this.state.currentInput, from:"me" }
+        let newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), sender: from, date: "On " + newDateLocal }
         existingMessages.push(newMessage)
 
         return existingMessages;
     }
 
+    /*FIND CHARACTER DEMO ONLY */
+
+    whoTalk = () => {
+        var lastChar = this.state.currentInput.slice(-5);
+        console.log(lastChar)
+        if(lastChar==="#else") {
+            return "someone else"
+        } else {
+            return "myself"
+        }
+    }
+    /***************************/
+
     render () {
-        console.log(this.state)
+    
         return (
             <div>   
                 <AnswerBoard

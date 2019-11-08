@@ -24,7 +24,7 @@ class GameBoard extends React.Component {
     }
    
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng]){
+       if (this.state.board[lat][lng] || !this.state.isDrawing){
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)

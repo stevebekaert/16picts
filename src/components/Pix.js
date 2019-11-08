@@ -3,7 +3,8 @@ import React from 'react'
 const Pix = ({drawBoard, color, lat, lng, isDrawing}) =>
 <div className="cell"
     
-    onMouseOver={ isDrawing ? () => drawBoard(lat, lng) : undefined}
+    onMouseOver={ () => drawBoard(lat, lng)}
+    onClick={() =>  drawBoard(lat, lng)}
     style ={{
         backgroundColor : !color ? 'inherit' : 'red'
     }}

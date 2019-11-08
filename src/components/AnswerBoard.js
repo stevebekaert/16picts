@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Message from './Message'
 
 
@@ -9,11 +9,12 @@ class AnswerBoard extends React.Component {
             this.props.messages.map(message =>
                 <Message
                     content={message.content}  
-                    from={"me"} 
+                    sender={message.sender} 
+                    date={message.date}
                     style={{
                         backgroundColor: "blue",
                         border: "1px solid blue",
-                        borderradius: "20px"
+                        borderRadius: "20px"
                     }}
                 />
             
