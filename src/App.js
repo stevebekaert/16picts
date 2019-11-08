@@ -12,7 +12,6 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Header}></Route>
             <Route path="/Pictionary" component={Pictionary}></Route>
-            <Route path="/App" component={App}></Route>
           </Switch>
         </router>          
        </div>
