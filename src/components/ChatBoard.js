@@ -29,11 +29,12 @@ class ChatBoard extends Component {
     }
 
     getNewMessages = () => {
-        let newDate = new Date();
-        let newDateLocal = newDate.toLocaleString();
+        let newDate = new Date().toLocaleString();
         let from = this.whoTalk()
         let existingMessages  = this.state.messages;
-        let newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), sender: from, date: "On " + newDateLocal }
+        let newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), 
+                            sender: from, 
+                            date: "On " + newDate }
         existingMessages.push(newMessage)
 
         return existingMessages;
@@ -55,17 +56,19 @@ class ChatBoard extends Component {
     render () {
     
         return (
-            <div>   
+        <div>
+            <div className="chat-zone">   
                 <AnswerBoard
                     messages={this.state.messages}>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
+            </div>
                 <MessageInput type="text" 
                             addMessage={this.handleChange}
                             confirmMessage={this.handleSubmit}
                             currentMessage={this.state.currentInput}>
                 </MessageInput>
-            </div>
+        </div>
         )   
     }
 }

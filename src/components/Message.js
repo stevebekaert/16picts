@@ -1,6 +1,4 @@
 import React from 'react';
-import { relative } from 'path';
-
 
 class Message extends React.Component {
 
@@ -22,7 +20,7 @@ class Message extends React.Component {
                         style={{
                         wordBreak: "break-all",
                         width: "80%",
-                        backgroundColor:  this.props.sender === "myself" ? "green" : "blue",
+                        backgroundColor:  this.props.sender === "myself" ? "rgba(15, 160, 15, 1)" : "rgba(15, 15, 160, 1)",
                         borderRadius: "20px",
                         padding: "5px",
                         fontSize: "12px",

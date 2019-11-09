@@ -1,13 +1,15 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
+import Palette from './Palette';
 
 class GameBoard extends React.Component {
      constructor(props){
        super(props)
    
        this.state = {
-         board: this.buildBoard(20),
-         isDrawing : false
+         board: this.buildBoard(40),
+         isDrawing : false,
+         chosenColor: "black"
        }
      }
    
@@ -24,7 +26,7 @@ class GameBoard extends React.Component {
     }
    
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng] || !this.state.isDrawing){
+       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -33,33 +35,51 @@ class GameBoard extends React.Component {
             board: updatedBoard
           })
     }
+
+    resetGrid = () => {
+      this.setState({
+        board: this.buildBoard(40)
+      })
+    }
          
-    updateGrid = (grid, lat, lng) => {
+    updateGrid = (grid, lat, lng, color = this.state.chosenColor) => {
           let updateGrid = [...grid];
-          updateGrid[lat][lng] = 1;
+          updateGrid[lat][lng] = color;
     
           return updateGrid
     }
 
     handleMouseDown = () => {
         this.setState({isDrawing: true})
-        console.log("down")
     }
     
     handleMouseUp = () => {
         this.setState({isDrawing: false})
-        console.log("up")
     }
 
-    render(){
+    handleColorSelection = (color) => {
+      this.setState({
+          chosenColor: color
+      })
+    }
+
+   render(){
       const { board } = this.state
       return(
-          <div className='board-canvas' onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+          <div className='board-canvas' 
+               onMouseDown={this.handleMouseDown} 
+               onMouseUp={this.handleMouseUp}
+               style={{
+                 height: "480px",
+                 width: "480px"
+               }}>
           <DrawingBoard
               board={board}
               drawBoard={this.drawBoard}
               isDrawing={this.state.isDrawing}
+              chosenColor={this.state.chosenColor}
            />
+          <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/> 
           </div>
     );
     }
