@@ -4,7 +4,7 @@ import GameBoard from './GameBoard/GameBoard.js'
 import ChatBoard from './Chat/ChatBoard.js'
 import PlayerChoice from './Drawer/PlayerChoice'
 import Timer from './Timer.js';
-import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'
+/*import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'*/
 
 class Game extends Component {
 

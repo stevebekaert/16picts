@@ -1,7 +1,7 @@
 import React from 'react'
 import Pix from './Pix.js'
 
-const DrawingBoard = ({board, drawBoard, chosenColor, pixWidth, pixHeight}) =>
+const DrawingBoard = ({board, drawBoard, chosenColor, sendPosition}) =>
     <div className = 'board-canvas'>
         {board.map((row, x) => 
             <div className='row' key={x}>
@@ -13,6 +13,7 @@ const DrawingBoard = ({board, drawBoard, chosenColor, pixWidth, pixHeight}) =>
                            lat={x}
                            lng={y}
                            chosenColor={chosenColor}
+                           sendPosition={sendPosition}
                         ></Pix>
                     </div>
                 )}

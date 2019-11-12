@@ -1,7 +1,6 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
 import Palette from './Palette';
-
 class GameBoard extends React.Component {
      constructor(props){
        super(props)
@@ -49,6 +48,19 @@ class GameBoard extends React.Component {
           return updateGrid
     }
 
+    sendPosition = (lat, lng) => {
+      console.log('I in')
+      if (this.state.board[lat][lng] === this.state.chosenColor) {
+        return 
+      }
+      let updatedBoard = this.updateGrid(this.state.board, lat, lng)
+      this.setState({
+        actualPosition: [lat, lng],
+        board : updatedBoard
+      })
+      
+    }
+
     handleMouseDown = () => {
         this.setState({isDrawing: true})
     }
@@ -78,6 +90,7 @@ class GameBoard extends React.Component {
               drawBoard={this.drawBoard}
               isDrawing={this.state.isDrawing}
               chosenColor={this.state.chosenColor}
+              sendPosition={this.sendPosition}
            />
           <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/> 
           </div>
