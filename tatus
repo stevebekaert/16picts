@@ -1,0 +1,59 @@
+[33mcommit b5cbbc63e4ea378f8cdb49beb83e1a32826068c7[m[33m ([m[1;36mHEAD -> [m[1;32msprint1_steve[m[33m)[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Tue Nov 12 12:28:44 2019 +0100
+
+    Begin Sprint 3
+
+[33mcommit 4b3489ed41c45b418a65fef5a3cfbc8ff7017572[m[33m ([m[1;31morigin/sprint2_steve[m[33m, [m[1;32msprint2_steve[m[33m)[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Tue Nov 12 11:04:44 2019 +0100
+
+    Brouillon
+
+[33mcommit 3d6c8fcefc227d673b710596a3740c7f5a503f69[m[33m ([m[1;31morigin/sprint1_steve[m[33m)[m
+Author: Hive51 <50019416+Hive51@users.noreply.github.com>
+Date:   Sun Nov 10 15:45:43 2019 +0100
+
+    adding sendPosition onClick of Pix sending to grand parent to update onClick, check it out...
+
+[33mcommit dd8379779fd9ac439314055f47eb705020d28296[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Sat Nov 9 21:34:53 2019 +0100
+
+    graphicall improvements
+
+[33mcommit 7d6cbc3b78d8a6af589aae5be4663ae1da055dde[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Fri Nov 8 13:59:31 2019 +0100
+
+    Smaller, better, faster
+
+[33mcommit 5af0e7a62041468b7981265684126aa9fecb4399[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Fri Nov 8 12:39:56 2019 +0100
+
+    Chat message with simulation
+
+[33mcommit 102e04d5a36587307160a49a2c1024b2e0f04b6c[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Fri Nov 8 10:39:26 2019 +0100
+
+    prep to merge
+
+[33mcommit 9d3e1ff8dbe5a1fedb3319bc53e895e70305b45d[m[33m ([m[1;32msprint1[m[33m, [m[1;32mdev[m[33m)[m
+Author: Antoine <antoinevl@live.be>
+Date:   Tue Nov 5 14:53:10 2019 +0100
+
+    modif reussite grid
+
+[33mcommit fba70b5d15d5021f9a11adda591326f2cb533eb2[m
+Author: Antoine <antoinevl@live.be>
+Date:   Tue Nov 5 12:29:49 2019 +0100
+
+    avancement grid
+
+[33mcommit ced4431f00e5401627709ed4d9c0872b301cfe74[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/dev[m[33m, [m[1;32mmaster[m[33m)[m
+Author: stevebekaert <bekaert_steve@hotmail.com>
+Date:   Wed Oct 30 14:25:55 2019 +0100
+
+    Initial commit from Create React App
