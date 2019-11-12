@@ -5,6 +5,9 @@
 .board-canvas {
     border-radius: 3px;
     border: solid black 1px;
+    
+    width: 480px;
+    height: 480px;
 }
   
 .row {
@@ -24,5 +27,5 @@
 .cell {
     width: 10px;
     height: 10px;
-    border: solid black 2px;
+    border: solid black 1px;
 }
