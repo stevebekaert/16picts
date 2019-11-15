@@ -1,119 +1,60 @@
 import React, { Component } from 'react';
-
+import '../App.css';
+import GameBoard from './GameBoard/GameBoard.js'
+import ChatBoard from './Chat/ChatBoard.js'
+import PlayerChoice from './Drawer/PlayerChoice'
 import Timer from './Timer.js';
-import GameBoard from './GameBoard.js';
-import ChatBoard from './ChatBoard.js';
 import PlayerScore from './PlayerScore';
-
-import './Game.css';
-
-
+/*import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'*/
 
 class Game extends Component {
 
-  constructor(props){
-    super(props);
-
-    this.players = [
-      {
-        pseudo: 'Lucoaoaoaoaoaoaoaoaoaoaoaoao',
-        avatar: '../images/luc.jpg',
-        score: 103,
-        isDrawing: false
-      },
-  
-      {
-        pseudo: 'Bob',
-        avatar: '../images/bob.jpg',
-        score: 256,
-        isDrawing: false
-      },
-  
-      {
-        pseudo: 'Jane',
-        avatar: '../images/jane.jpg',
-        score: 10,
-        isDrawing: true
-      },
-  
-      {
-        pseudo: 'Emilie',
-        avatar: '../images/emilie.jpg',
-        score: 554,
-        isDrawing: false,
-      },
-
-      {
-        pseudo: 'Jack',
-        avatar: '../images/jack.jpg',
-        score: 1002,
-        isDrawing: false
-      },
-
-      {
-        pseudo: 'Cindy',
-        avatar: '../images/cindy.jpg',
-        score: 102,
-        isDrawing: false
-      }
-    ];
-
-    this.state = {
-      players: this.players
+  constructor(props) {
+    super(props)
+    this.state = { 
+      choices: []
     }
   }
 
+  componentDidMount(){
+    const axios = require('axios');
 
-  upScore = (index) => {
-    console.log('Je suis dans upScore')
-    
-    let playersUpdate = this.updateScorePlayer(this.state.players, index, 100)
-
-    this.setState({
-      players: playersUpdate
+    axios.get('https://www.giantbomb.com/api/characters/?api_key=dce469af616144d408b3299fbc5084e8980edabd&limit=3&field_list=name&format=jsonp', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      }
+      }).then(function (response) {
+        console.log('response is : ' + response.data);
+      }).catch(function (error) {
+        if (error.response) {
+          console.log(error.response.headers);
+        } 
+        else if (error.request) {
+            console.log(error.request);
+        } 
+        else {
+          console.log(error.message);
+        }
+      console.log(error.config);
     });
+
+
   }
-
-  updateScorePlayer = (players, index, score) => {
-    console.log('Je suis dans updateScorePlayer')
-    console.log('players: ', players)
-    console.log('index: ', index)
-    console.log('score: ', score)
-
-    let playersScoreUpdated = players.slice(0);
-    console.log('playersScoreUpdated', playersScoreUpdated)
-    playersScoreUpdated[index].score = playersScoreUpdated[index].score + score;
-
-    return playersScoreUpdated
-  }
+      
 
   render(){
-      return(
-        <div className="App">
-          <div className="drawingBoard-chatBoard">
+    return(
+        <div className="game">
             <Timer />
-            <GameBoard />
-            <ChatBoard />
-          </div>
-
-          <div>
-            {this.state.players.map((player, x) => {
-              return(
-                <div>
-                  <div>{player.pseudo} / Score: {player.score}</div>
-                  <button onClick={() => this.upScore(x)} >Score + 100</button>
-                </div>
-              )
-            })}
-          </div>
-
-          <PlayerScore players={this.players} />
+            <div className="game-zone">
+                <GameBoard />
+                <PlayerChoice choices={this.state.choices}/>
+                <ChatBoard />
+            </div>
+          <PlayerScore />
       </div>
-    );
+  );
   }
-
 }
 
-
-
-export default Game;
+export default Game

@@ -53,7 +53,7 @@ class Timer extends Component {
     
     render(){
         return (
-            <div className="componentTimer" >
+            <div className="timer-zone" >
                 <button onClick={this.startTimer} >GO</button>
                 <button onClick={this.initializeTimer}>RESET</button>
 
@@ -61,7 +61,7 @@ class Timer extends Component {
                     {this.state.on ? 'EN COURS' : 'STOP'}
                 </div>
 
-                <div className= 'timer-zone'>
+                <div className= 'timer-bar-zone'>
                     <div className='timer-completion' style={{
                         width: `${this.state.completion}%`
                     }} >

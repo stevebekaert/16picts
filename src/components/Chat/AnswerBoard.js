@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Message from './Message'
 
 
-
-class AnswerBoard extends React.Component {
+class AnswerBoard extends Component {
 
     render() {
         return (
@@ -14,8 +13,10 @@ class AnswerBoard extends React.Component {
                     date={message.date}
                     style={{
                         backgroundColor: "blue",
-                        border: "1px solid blue",
-                        borderRadius: "20px"
+                        borderRadius: "20px",
+                        border: "1px solid #c3c3c3",
+                        padding: "0 18px 10px",
+                        marginBottom: "20px"
                     }}
                 />
             )
