@@ -15,7 +15,7 @@ class App extends Component{
 
   render(){
     return(
-      <div className="App">
+      <div className="App visible">
           <Switch>
             <Route exact path="/" component={Header}></Route>
             <Route path="/Avatar" component={Avatar}></Route>
