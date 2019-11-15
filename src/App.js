@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
-import Game from './components/Game.js'
-import Header from './components/Header.js';
-
 import { Switch, Route } from 'react-router-dom';
+import Avatar from './components/Avatar/Avatar.js';
+import Header from './components/Header.js';
+import Game from './components/Game.js';
 
 class App extends Component{
 
@@ -19,8 +18,9 @@ class App extends Component{
       <div className="App">
           <Switch>
             <Route exact path="/" component={Header}></Route>
-            <Route path="/Game" component={Game}></Route>
-          </Switch>      
+            <Route path="/Avatar" component={Avatar}></Route>
+            <Route path="/Game"   component={Game}  ></Route>
+          </Switch>       
       </div>
     )
   }

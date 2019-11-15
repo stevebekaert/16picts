@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Pix from './Pix.js'
 
 const DrawingBoard = ({board, drawBoard, chosenColor, sendPosition}) =>
