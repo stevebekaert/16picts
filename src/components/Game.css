@@ -1,5 +1,6 @@
 .drawingBoard-chatBoard{
     display: flex;
-    width: 70vw;
-    height: 500px;
+    flex-wrap: wrap;
+
+    width: 80%;
 }

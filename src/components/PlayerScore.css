@@ -1,0 +1,18 @@
+.PlayerScore{
+    width: 95%;
+
+    margin-top: 50px;
+
+    display: flex;
+    background-color: brown;
+}
+
+.Player{
+    margin:5px;
+    min-width: 100px;
+    background-color: orange;
+}
+
+.Player[data-order="1"]{
+    background-color: chartreuse;
+}
