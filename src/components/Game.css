@@ -4,3 +4,8 @@
 
     width: 80%;
 }
+
+.zone-test{
+    height: 100px;
+    display: flex;
+}

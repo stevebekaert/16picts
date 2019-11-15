@@ -11,9 +11,51 @@ class Game extends Component {
 
   constructor(props) {
     super(props)
+
+    this.players = [
+      {
+        pseudo: 'Luc',
+        avatar: './images/Luc.jpg',
+        score: 550
+      },
+
+      {
+        pseudo: 'Leon',
+        avatar: './images/Leon.jpg',
+        score: 100
+      },
+
+      {
+        pseudo: 'Emilie',
+        avatar: './images/Emilie.jpg',
+        score: 1001
+      },
+
+      {
+        pseudo: 'Jane',
+        avatar: './images/Jane.jpg',
+        score: 225
+      },
+      
+      {
+        pseudo: 'Jack',
+        avatar: './images/Jack.jpg',
+        score: 10
+      },
+
+      {
+        pseudo: 'Mathias',
+        avatar: './images/Mathias.jpg',
+        score: 356
+      }
+    ];
+
     this.state = { 
-      choices: []
+      choices: [],
+      players: this.players
     }
+
+    
   }
 
   componentDidMount(){
@@ -41,6 +83,23 @@ class Game extends Component {
 
   }
       
+  updatingScore(index, score){
+    let updatedScore = this.updateScore(this.players, index, score);
+
+    this.setState({
+      players: updatedScore
+    });
+  }
+
+
+
+  updateScore(players, index, score){
+    let updatedScore = players.slice(0);
+
+    updatedScore[index].score = updatedScore[index].score + score;
+
+    return updatedScore
+  }
 
   render(){
     return(
@@ -51,7 +110,18 @@ class Game extends Component {
                 <PlayerChoice choices={this.state.choices}/>
                 <ChatBoard />
             </div>
-          <PlayerScore />
+
+            <div className="zone-test" >
+              {this.state.players.map((player, x) => 
+                <div>
+                  <div>{player.pseudo} score: {player.score}</div>
+                  <button onClick={() => {this.updatingScore(x, 100)}} >+100</button>
+                  <button onClick={() => {this.updatingScore(x, -100)}} >-100</button>
+                </div>
+              )}
+            </div>
+
+          <PlayerScore players={this.players} />
       </div>
   );
   }
