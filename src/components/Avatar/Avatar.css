@@ -1,0 +1,22 @@
+.imageDisign{
+    width: 5%;
+    height: 10%;
+
+}
+
+.imageDisign:hover{
+    box-shadow: 0px 0px 5vh grey;
+    border-radius: 10vh;
+    width: 7%;
+    height: 13%;
+    overflow: hidden;
+}
+
+.imageDisign:active{
+    box-shadow: 0px 0px 7vh rgb(197, 136, 136);
+}
+
+.avatarDesign{
+    width: 7%;
+    height: 13%;
+}

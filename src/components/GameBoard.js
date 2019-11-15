@@ -33,12 +33,11 @@ class GameBoard extends React.Component {
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
-          
           this.setState({
             board: updatedBoard
           })
     }
-        
+
   updateGrid = (grid, lat, lng) => {
     let updateGrid = [...grid];
     updateGrid[lat][lng] = 1;

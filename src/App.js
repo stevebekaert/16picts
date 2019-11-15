@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
-import Game from './components/Game.js';
+import Avatar from './components/Avatar/Avatar.js';
 import Header from './components/Header.js';
 
 import './App.css';
@@ -13,12 +12,10 @@ class App extends Component{
   render(){
     return(
       <div className="App">
-        <router>
           <Switch>
             <Route exact path="/" component={Header}></Route>
-            <Route path="/Game" component={Game}></Route>
-          </Switch>
-        </router>          
+            <Route path="/Avatar" component={Avatar}></Route>
+          </Switch>       
       </div>
     )
   }
