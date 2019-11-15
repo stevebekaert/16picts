@@ -1,14 +1,19 @@
-.imageDisign{
+.imageDisignBloc{
     width: 5%;
-    height: 10%;
+    height: 90%;
+    margin: 0.2vw;
+}
 
+.imageDisign{
+    width: 100%;
+    height: 100%;
 }
 
 .imageDisign:hover{
-    box-shadow: 0px 0px 5vh grey;
+    box-shadow: 0px 0px 4vh grey;
     border-radius: 10vh;
-    width: 7%;
-    height: 13%;
+    width: 107%;
+    height: 107%;
     overflow: hidden;
 }
 
@@ -19,4 +24,45 @@
 .avatarDesign{
     width: 7%;
     height: 13%;
+}
+.no-image{
+    width: 7%;
+    height: 13%;
+}
+
+.imagesDisign{
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navAvatarPageDiv{
+    display: flex;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translate3d(0, 0, 20px);
+ 
+}
+
+.navAvatarPageLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    margin: 10%;
+    width: 20vw;
+    height: 10vh;   
+    background-color: rgba(128, 128, 128, 0.61);
+    border-radius: 3px;
+    transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+}
+
+.navAvatarPageLink:hover{
+    color: rgba(202, 194, 194, 0.877);
+    background: linear-gradient(to top, rgba(185, 19, 19, 0.705), 20%, rgba(128, 128, 128, 0.705));
+    border-radius: 3px;
+    box-shadow: 0px 0px 7px grey;
+    transform: translate3d(0, 0, 0px) rotateX(0deg) rotateY(20deg) rotateZ(0deg);
 }

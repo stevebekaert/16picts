@@ -6,16 +6,16 @@ import React, { Component } from 'react'
             super(props)
                 this.state = { pseudo: '' };
             }
-            myChangeName = (event) => {
-              this.setState({pseudo: event.target.value});
-              console.log(this.state.pseudo)
-            }
+            // myChangeName = (event) => {
+            //   this.setState({pseudo: event.target.value});
+            //   console.log(this.state.pseudo)
+            // }
+
             render() {
               return (
                 <form>
-                <h1>Hello {this.state.pseudo}</h1>
-                <p>Enter pseudo:</p>
-                <input type='text' onChange={this.myChangeName} />
+                <p>Choisis ton pseudo :</p>
+                <input type='text' onChange={(event) => this.props.fctNameAvatar(event)} />
                 </form>
                 
               );

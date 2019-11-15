@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Avatar.css'
 
 const images = ['http://emiconf.ens-lyon.fr/images/avatar.png/image',
-'https://i.dlpng.com/static/png/1244305--profile-png-512_512_preview.png',
 'https://www.sccpre.cat/mypng/full/24-244898_profile-man-male-photo-face-portrait-illustration-male.png',
 'https://pngimage.net/wp-content/uploads/2018/06/profil-png-5.png',
 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
@@ -32,13 +31,15 @@ class ChoseImages extends Component{
     render(){
         return(
             <div>
-                <p> Nos avatar :</p>
+                <p> Choisis ton avatar :</p>
                 <div className="imagesDisign">
                     {
                         images.map((image) => 
-                        <img onClick={() => this.props.fctChoseImage(image)} 
-                             className='imageDisign'
-                             src={image} /> )
+                        <div className="imageDisignBloc">
+                            <img onClick={() => this.props.fctChoseImage(image)} 
+                                className='imageDisign'
+                                src={image} /></div> )
+                        
                     }
                 </div>
             </div>
