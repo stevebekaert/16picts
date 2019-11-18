@@ -36,24 +36,8 @@ class GameBoard extends React.Component {
          }
        }
 
-      //Addition to server        
-        const url = "http://localhost:8080/api/buildGrid"
-        const config = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(grid)
-        };
-        fetch(url, config)
-          .then(response => response.json())
-          .then(response => console.log("Grid in this.buildBoard sent to server?", response))
-          .catch(error => console.log(error))
-
-   
        return grid
     }
-    //Tear here to delete
    
     drawBoard = (lat, lng) => {
        if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
@@ -78,26 +62,6 @@ class GameBoard extends React.Component {
 
       return updateGrid
     }
-
-  //Addition to server
-    updateServerGrid = (grid, lat, lng, color = this.state.chosenColor) => {
-      let updateGrid = [...grid];
-      updateGrid[lat][lng] = color;
-      
-      const url = "http://localhost:8080/api/updateGrid"
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateGrid)
-    };
-      fetch(url, config)
-        .then(response => response.json())
-        .then(response => this.drawBoard(lat, lng))
-        .catch(error => console.log(error))
-    }
-    //Tear here to delete
 
     sendPosition = (lat, lng) => {
 

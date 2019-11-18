@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import GameBoard from './GameBoard/GameBoard.js'
 import ChatBoard from './Chat/ChatBoard.js'
-import PlayerChoice from './Drawer/PlayerChoice'
+import PlayerChoiceList from './Drawer/PlayerChoiceList'
 import Timer from './Timer.js';
 
 const axios = require('axios')
@@ -36,13 +36,6 @@ class Game extends Component {
 
 
   render() {
-    let playerchoice;
-    if(this.state.gameChosen) {
-      playerchoice = <PlayerChoice onClick={this.handleChoiceClick} choices={this.state.choices} gameChosen={this.state.gameChosen} selected/>
-    } else {
-      playerchoice = <PlayerChoice onClick={this.handleChoiceClick} choices={this.state.choices} />
-    }
-
     return( 
         <div className="game">
             <Timer />
@@ -50,7 +43,9 @@ class Game extends Component {
                 <GameBoard />
                 <div className="player-choice-zone">
                   {this.state.isReady ?
-                  playerchoice  :
+                    (!this.state.gameChosen ?
+                      <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} /> :
+                      <PlayerChoiceList gameChosen={this.state.gameChosen}/>) :
                   <div style= {{color: "#000000"}}>Loading...</div> }
                 </div>
                 <ChatBoard />
