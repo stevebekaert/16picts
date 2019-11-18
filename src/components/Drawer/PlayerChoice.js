@@ -20,19 +20,25 @@ class PlayerChoice extends React.Component {
 
     render() {
       const {choices} = this.props
-      console.log("choices are..", choices)
       let random_numbers = this.randomNumbers()
-      console.log("RANDOM_NUM", random_numbers)
+      let selection = ''
+      if(!this.props.selected) {
+        selection =  random_numbers.map((key) =>
+                      <div className="playerchoice-zone" value={choices[key].name} onClick={() => this.props.onClick(choices[key].name)}>
+                        <img className="playerchoice-img" src={choices[key].image.screen_url} alt={choices[key].name}/>
+                        <div className="playerchoice-name">{choices[key].name}</div>           
+                      </div> )
+      } else {
+        selection =   <div className="playerchoice-zone">
+                        <div className="playerchoice-name">{this.props.gameChosen}</div>           
+                      </div> 
+      }
 
       return (
-        random_numbers.map((key) =>
-        <div className="playerchoice-zone" value={choices[key].name} onClick={() => this.props.onClick(choices[key].name)}>
-          <img className="playerchoice-img" src={choices[key].image.screen_url} alt={choices[key].name}/>
-          <div className="playerchoice-name">{choices[key].name}</div>           
-        </div>    
-              
+        selection
+       
       )
-      )
+      
     }
 }
 

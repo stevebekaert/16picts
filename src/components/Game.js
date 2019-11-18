@@ -36,14 +36,21 @@ class Game extends Component {
 
 
   render() {
-    return(
+    let playerchoice;
+    if(this.state.gameChosen) {
+      playerchoice = <PlayerChoice onClick={this.handleChoiceClick} choices={this.state.choices} gameChosen={this.state.gameChosen} selected/>
+    } else {
+      playerchoice = <PlayerChoice onClick={this.handleChoiceClick} choices={this.state.choices} />
+    }
+
+    return( 
         <div className="game">
             <Timer />
             <div className="game-zone">
                 <GameBoard />
                 <div className="player-choice-zone">
                   {this.state.isReady ?
-                  <PlayerChoice onClick={this.handleChoiceClick} choices={this.state.choices} gameChosen={this.state.gameChosen}/> :
+                  playerchoice  :
                   <div style= {{color: "#000000"}}>Loading...</div> }
                 </div>
                 <ChatBoard />
