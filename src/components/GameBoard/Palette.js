@@ -2,7 +2,7 @@ import React from "react"
 import ColorOption from './ColorOption'
 class Palette extends React.Component {
 
-    availableColors = ["#65b2df", "#5bcc8b", "#e6bb46", "#dfb665", "#df7065", "#c365df", "grey", "#000000"] 
+    availableColors = ["#65b2df", "#5bcc8b", "#e6bb46", "#dfb665", "#df7065", "#c365df", "grey", "#000000", 0] 
 
     render() {
         return (

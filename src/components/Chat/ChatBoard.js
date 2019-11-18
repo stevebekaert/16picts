@@ -3,6 +3,7 @@ import MessageInput from './MessageInput';
 import AnswerBoard from './AnswerBoard';
 
 class ChatBoard extends Component {
+    messagesEndRef = React.createRef()
     state = {
         currentInput: '',
         isWriting: false,
@@ -27,6 +28,8 @@ class ChatBoard extends Component {
             }
             event.preventDefault();   
     }
+
+    
 
     getNewMessages = () => {
         let newDate = new Date().toLocaleString();
@@ -62,6 +65,7 @@ class ChatBoard extends Component {
                     messages={this.state.messages}>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
+                <div ref={this.messagesEndRef} />
             </div>
                 <MessageInput type="text" 
                             addMessage={this.handleChange}
