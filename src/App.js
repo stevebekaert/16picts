@@ -50,17 +50,27 @@ class App extends Component{
               render={(props) => <Avatar 
               avatar={this.state.avatar}
               pseudo={this.state.pseudo}
+
               selectImageAvatar={(image) => this.handleClick(image)} 
               selectNameAvatar={(event) => this.myChangeName(event)}
               selectIdAvatar={(event) => this.sendUserToGamePage(event)}
+
               isdrawer={this.state.isdrawer} />}>
             </Route>
+
+            
             <Route 
-              path="/Game" 
+              path="/GameGuesser" 
               render={(props) => 
-                <Game 
-                  user={this.state} />}>
+                <Game user={this.state} />}>
             </Route>
+
+            <Route 
+              path="/GameDrawer" 
+              render={(props) => 
+                <Game user={this.state} />}>
+            </Route>
+            
           </Switch>       
       </div>
     )
