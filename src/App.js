@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Avatar from './components/Avatar/Avatar.js';
 import Header from './components/Header.js';
-import Game from './components/Game.js';
+import Game from './components/Game/Game.js';
 
 class App extends Component{
 
@@ -57,8 +57,9 @@ class App extends Component{
             </Route>
             <Route 
               path="/Game" 
-              render={(props) => <Game 
-              user={this.state} />}>
+              render={(props) => 
+                <Game 
+                  user={this.state} />}>
             </Route>
           </Switch>       
       </div>

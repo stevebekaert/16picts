@@ -1,13 +1,14 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
 import Palette from './Palette';
-import GuessZone from './GuessZone';
+import GuessZone from '../Guesser/GuessZone';
 
 class GameBoard extends React.Component {
      constructor(props){
        super(props)
    
        this.state = {
+         /*board: [[0,0], [0,0]],*/
          board: this.buildBoard(40),
          isDrawing : false,
          chosenColor: "black"
@@ -15,7 +16,21 @@ class GameBoard extends React.Component {
 
        this.isDrawing = false;
      }
-   
+
+    /* componentDidMount() {
+       this.callNewGrid()
+     }
+
+    callNewGrid = () => {
+      fetch('http://localhost:8080/api/createGrid')
+      .then(response => response.json())
+      .then(data => 
+        {
+          console.log(data.grid)
+          this.setState({board: data.grid})
+        })
+    }*/
+
     buildBoard = (squareSize) => {
        let grid = [];
        for (let x = 0; x < squareSize; x++){
@@ -24,7 +39,7 @@ class GameBoard extends React.Component {
            grid[x][y] = 0;
          }
        }
-   
+
        return grid
     }
    
@@ -44,16 +59,16 @@ class GameBoard extends React.Component {
         board: this.buildBoard(40)
       })
     }
-         
+
     updateGrid = (grid, lat, lng, color = this.state.chosenColor) => {
-          let updateGrid = [...grid];
-          updateGrid[lat][lng] = color;
-    
-          return updateGrid
+      let updateGrid = [...grid];
+      updateGrid[lat][lng] = color;
+
+      return updateGrid
     }
 
     sendPosition = (lat, lng) => {
-      console.log('I in')
+
       if (this.state.board[lat][lng] === this.state.chosenColor) {
         return 
       }
@@ -99,7 +114,7 @@ class GameBoard extends React.Component {
           
           {this.props.isDrawing  
             ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
-            : <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
+            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
           }
           </div>
         );

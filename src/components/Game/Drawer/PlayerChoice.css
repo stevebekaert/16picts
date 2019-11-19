@@ -1,0 +1,19 @@
+.player-choice-game {
+    display:flex;
+    flex-direction: column;
+    width: 200px;
+    max-width: 200px;
+}
+
+.playerchoice-zone{
+    color: black;
+    font-size: "10px";
+    width: 200px;
+    max-width: 200px;
+}
+
+.playerchoice-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

@@ -41,11 +41,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
   width:100%;
-  font-family: 'Open Sans', sans-serif
-
-  
+  font-family: 'Open Sans', sans-serif  
 }                               
-
 
 /*Note pour le merge: je ne crois pas que ce soit nécessaire. Vraiment. */
 /*.board-canvas {
@@ -68,7 +65,7 @@
 }
 
 .cell {
-  width: 10px;
+  
   height: 10px;
   border: 1px solid #c3c3c3;
 }
@@ -86,6 +83,10 @@
   padding: 0 18px 10px;
   overflow-y: auto;
   width:480px;
+}
+
+.chat-zone > :first-child {
+  margin-top: auto !important
 }
 
 .chat-form {
@@ -114,6 +115,10 @@
   margin-top: 10px;
   box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
   align-items:center;
+}
+
+.color-container:last-child {
+  border: 1px solid #c3c3c3
 }
 
 .color-option {
@@ -148,9 +153,19 @@
 flex-direction: column;
 align-items: center;
   width:100%;
+  /*background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255,255,255,0.8)), url("./mario.jpg")*/
+
 }
 
 input[type="text"] {
   width: 100%;
 box-sizing: border-box;
 }
+
+.error {
+  font-size: 10px;
+  background-color:red;
+  color: #fff;
+  
+}
+

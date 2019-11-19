@@ -67,7 +67,6 @@ class Timer extends Component {
                     }} >
                     </div>
                 </div>
-                <div className='timer-text'>{this.state.time}</div>
             </div>
         );
     }

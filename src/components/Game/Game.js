@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import GameBoard from './GameBoard/GameBoard.js'
 import ChatBoard from './Chat/ChatBoard.js'
-import PlayerChoice from './Drawer/PlayerChoice'
+import PlayerChoiceList from './Drawer/PlayerChoiceList'
 import Timer from './Timer.js';
 import PlayerScore from './PlayerScore';
 /*import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'*/
@@ -25,7 +25,7 @@ class Game extends Component {
         pseudo: 'Leon',
         avatar: './images/Leon.jpg',
         score: 100,
-        isDrawing: false,
+        isDrawing: true,
         win: false
       },
 
@@ -88,35 +88,26 @@ class Game extends Component {
 
     this.state = { 
       choices: [],
+      isReady : false,
       players: this.players,
-      gameChosen: [{name: 'The Legend Of Zelda'}],
+      gameChosen: ""
     }
 
   }
 
-  componentDidMount(){
-    const axios = require('axios');
 
-    axios.get('https://www.giantbomb.com/api/characters/?api_key=dce469af616144d408b3299fbc5084e8980edabd&limit=3&field_list=name&format=jsonp', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      }
-      }).then(function (response) {
-        console.log('response is : ' + response.data);
-      }).catch(function (error) {
-        if (error.response) {
-          console.log(error.response.headers);
-        } 
-        else if (error.request) {
-            console.log(error.request);
-        } 
-        else {
-          console.log(error.message);
-        }
-      console.log(error.config);
-    });
+  componentDidMount = () => {
+    fetch('http://localhost:8080/api/getAxios')
+      .then(response => response.json())
+      .then(response => this.setState({choices: response, isReady: true}))
+      //.then(data => this.setState({choices: data}))
+            /*.catch(error => console.log(this.setState({choices: this.state.choices.push(error)})))*/
+  }
 
-
+  handleChoiceClick = (name) => {
+    this.setState({
+      gameChosen: name
+    })
   }
       
   updatingScore(index, score){
@@ -135,17 +126,34 @@ class Game extends Component {
     return updatedScore
   }
 
-  render(){
-    return(
+  handleWin = () =>{
+    let playersUpdated = this.state.players.slice(0);
+
+    playersUpdated[0].win = true;
+
+    this.setState({
+      player: playersUpdated
+    })
+  }
+
+
+  render() {
+    return( 
         <div className="game">
             <Timer />
             <div className="game-zone">
-                <GameBoard  
-                  wordToGuess = {this.state.gameChosen[0].name} 
+                <GameBoard 
+                  wordToGuess = {this.state.gameChosen.name} 
                   win = {this.state.players[0].win} 
                   isDrawing = {this.state.players[0].isDrawing} />
-                <PlayerChoice choices={this.state.choices} />
-                <ChatBoard />
+                <div className="player-choice-zone">
+                  {this.state.isReady ?
+                    (!this.state.gameChosen ?
+                      <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} /> :
+                      <PlayerChoiceList gameChosen={this.state.gameChosen}/>) :
+                  <div style= {{color: "#000000"}}>Loading...</div> }
+                </div>
+                <ChatBoard gameChosen={this.state.gameChosen} isWin={this.handleWin} />
             </div>
 
             <div className="zone-test" >
