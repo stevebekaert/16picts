@@ -8,15 +8,30 @@ class App extends Component{
 
   constructor(props) {
     super(props)
-    this.state = { 
-      drawer : false,
-    }
+    this.state = {
+      pseudo : '',
+      avatar : '',
+      id : '',
+      isdrawer: false,
+  } 
+  }
+
+  handleClick = (image) => {
+    this.setState({avatar : image});
+    // console.log(key);
+   }
+
+  myChangeName = (event) => {
+    this.setState({pseudo: event.target.value});
+    event.preventDefault();
+  }
+
+  sendUserToGamePage = (event) => {
+    this.setState({id : event.timeStamp});
   }
 
   handleClickToCreateGame = () => {
-    this.setState({drawer : true});
-
-
+    this.setState({isdrawer : true});
 }
 
   render(){
@@ -27,22 +42,29 @@ class App extends Component{
             <Route
               exact
               path='/'
-              render={(props) => <Header selectRuler={() => this.handleClickToCreateGame()} />}
+              render={(props) => <Header 
+                selectRuler={() => this.handleClickToCreateGame()} />}
             />
             <Route 
               path="/Avatar" 
-              render={(routeProps) => <Avatar 
-              drawer={this.state.drawer} />}>
+              render={(props) => <Avatar 
+              avatar={this.state.avatar}
+              pseudo={this.state.pseudo}
+              selectImageAvatar={(image) => this.handleClick(image)} 
+              selectNameAvatar={(event) => this.myChangeName(event)}
+              selectIdAvatar={(event) => this.sendUserToGamePage(event)}
+              isdrawer={this.state.isdrawer} />}>
             </Route>
             <Route 
               path="/Game" 
-              component={Game} >
+              render={(props) => <Game 
+              user={this.state} />}>
             </Route>
           </Switch>       
       </div>
     )
   }
-  
+
 }
 
 
