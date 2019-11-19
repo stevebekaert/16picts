@@ -1,6 +1,23 @@
+.avatarPage{
+    background-color: rgb(69, 71, 82);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.choseImageDisign{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .imageDisignBloc{
     width: 10%;
-    height: 90%;
+    /* height: 90%; */
     margin: 0.7vw;
 }
 
@@ -22,18 +39,36 @@
 }
 
 .avatarDesign{
-    width: 7%;
-    height: 13%;
+    width: 9%;
+    border-radius: 10vh;
+    box-shadow: 2px 2px 4vh grey;
 }
+
+@keyframes imageDisign {
+    from{
+        -webkit-transform: rotateY(0deg);
+    }
+    to{
+        -webkit-transform: rotateY(360deg);
+    }
+}
+
+.imageDisign:hover {
+    animation: imageDisign 3s linear infinite;
+}
+
+.imageDesign{
+    animation-play-state: paused;
+    }
+
 .no-image{
-    width: 7%;
-    height: 13%;
+    width: 9%;
 }
 
 .imagesDisign{
+    width: 60%;
     height: 10vh;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -41,28 +76,48 @@
     display: flex;
     transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     transform: translate3d(0, 0, 20px);
- 
 }
 
 .navAvatarPageLink{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: rgb(44, 42, 42);
     text-decoration: none;
     margin: 10%;
     width: 20vw;
     height: 10vh;   
     background-color: rgba(128, 128, 128, 0.61);
-    border-radius: 3px;
+    border-radius: 40vw;
     transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    
+    font-size: 3em;
 }
 
 .navAvatarPageLink:hover{
     color: rgba(202, 194, 194, 0.877);
-    background: linear-gradient(to top, rgba(185, 19, 19, 0.705), 20%, rgba(128, 128, 128, 0.705));
-    border-radius: 3px;
+    background: linear-gradient(to top, rgba(98, 128, 192, 0.705), 20%, rgba(112, 107, 107, 0.705));
     box-shadow: 0px 0px 7px grey;
     transform: translate3d(0, 0, 0px) rotateX(0deg) rotateY(20deg) rotateZ(0deg);
+}
+
+.nameAvatarDisign{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.nameAvatarInput{
+    height: 50%;
+    width: 10%;
+    border: none;
+    background-color: rgba(77, 108, 109, 0.411);
+    box-shadow: 0px 0px 7px grey;
+    border-radius: 5px;
+}
+
+input.nameAvatarInput:focus {
+    outline: none;
+
 }

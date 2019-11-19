@@ -9,17 +9,35 @@ class App extends Component{
   constructor(props) {
     super(props)
     this.state = { 
-      choices: []
+      drawer : false,
     }
   }
 
+  handleClickToCreateGame = () => {
+    this.setState({drawer : true});
+
+
+}
+
   render(){
+
     return(
       <div className="App visible">
           <Switch>
-            <Route exact path="/" component={Header}></Route>
-            <Route path="/Avatar" component={Avatar}></Route>
-            <Route path="/Game"   component={Game}  ></Route>
+            <Route
+              exact
+              path='/'
+              render={(props) => <Header selectRuler={() => this.handleClickToCreateGame()} />}
+            />
+            <Route 
+              path="/Avatar" 
+              render={(routeProps) => <Avatar 
+              drawer={this.state.drawer} />}>
+            </Route>
+            <Route 
+              path="/Game" 
+              component={Game} >
+            </Route>
           </Switch>       
       </div>
     )

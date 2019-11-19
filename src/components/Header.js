@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-
 import './Header.css';
 
 
-
 class Header extends Component{
+    constructor(props) {
+        super(props)
+    } 
+
+    // handleClick = () => {
+    //     this.setState({drawer : true});
+    // }
     
     render(){
         return (
@@ -14,7 +19,7 @@ class Header extends Component{
                 <div className="terrain">
                 <ul className="buttonPlayAndJoinGameUl">
                     <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="Avatar" >Play</NavLink></li>
-                    <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="Avatar" >Create game</NavLink></li>
+                    <li className="navHomePageLi"><NavLink onClick={() => this.props.selectRuler()} className="navHomePageLink" activeClassName="active" to="Avatar">Create game</NavLink></li>
                 </ul>
                 </div>   
             </div>         

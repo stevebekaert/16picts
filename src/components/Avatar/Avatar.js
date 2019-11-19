@@ -3,13 +3,6 @@ import ChoseImages from './ChoseImages';
 import NameAvatar from './NameAvatar'
 import {NavLink} from 'react-router-dom';
 
-// creer un composent qui accepte plusieurs composent:
-// le choix de l'image
-// le choix du nom
-// le bouton "envoyer" avec les routes
-// le menu burger (fais par Marine)
-
-
 
 class Avatar extends Component {
   constructor(props) {
@@ -18,10 +11,11 @@ class Avatar extends Component {
         pseudo : '',
         avatar : '',
         id : '',
-        gameMaster : '',
-
+        drawer: this.props.drawer,
     }   
 }
+
+
 
 handleClick = (image) => {
   this.setState({avatar : image});
@@ -30,22 +24,30 @@ handleClick = (image) => {
 
  myChangeName = (event) => {
   this.setState({pseudo: event.target.value});
-  console.log(this.state.pseudo)
   event.preventDefault();
 }
 
+// sendUserToGamePage = () => {
+//   this.setState({id : })
+// }
 
 
   render(){
+
+  console.log(this.state)
       return(
-        <div className="App">
-          {this.state.avatar ?
-          <img className='avatarDesign' src={this.state.avatar} /> :
-          <div className="no-image"></div>}
-          <h1>Hello {this.state.pseudo}</h1>
-          <ChoseImages fctChoseImage = {this.handleClick}/>
-          <NameAvatar fctNameAvatar = {this.myChangeName}/>
-          <div className="navAvatarPageDiv"><NavLink className="navAvatarPageLink" activeClassName="active" to="Game" >Play</NavLink></div>
+        <div className="AppAvatar">
+          <div className="avatarPage">
+            {this.state.avatar ?
+            <img className='avatarDesign' src={this.state.avatar} /> :
+            <div className="no-image"></div>}
+            <h1>Hello {this.state.pseudo}</h1>
+            <ChoseImages fctChoseImage = {this.handleClick}/>
+            <NameAvatar fctNameAvatar = {this.myChangeName}/>
+            {this.state.pseudo && this.state.avatar ?
+            <div className="navAvatarPageDiv"><NavLink onClick={() => this.state.sendUserToGamePage()} className="navAvatarPageLink" activeClassName="active" to="Game" >Play</NavLink></div> :
+            false}
+          </div>
           </div>
     );
   }

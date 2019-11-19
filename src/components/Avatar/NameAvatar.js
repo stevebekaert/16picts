@@ -4,19 +4,16 @@ import React, { Component } from 'react'
     class NameAvatar extends Component{
         constructor(props) {
             super(props)
-                this.state = { pseudo: '' };
+                this.state = {};
             }
-            // myChangeName = (event) => {
-            //   this.setState({pseudo: event.target.value});
-            //   console.log(this.state.pseudo)
-            // }
+
 
             render() {
               return (
-                <form>
+                <div className="nameAvatarDisign">
                 <p>Choisis ton pseudo :</p>
-                <input type='text' onChange={(event) => this.props.fctNameAvatar(event)} />
-                </form>
+                <input className="nameAvatarInput" type='text' onChange={(event) => this.props.fctNameAvatar(event)} />
+                </div>
                 
               );
             }
