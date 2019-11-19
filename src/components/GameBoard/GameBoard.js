@@ -1,6 +1,7 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
 import Palette from './Palette';
+import GuessZone from './GuessZone';
 
 class GameBoard extends React.Component {
      constructor(props){
@@ -11,6 +12,8 @@ class GameBoard extends React.Component {
          isDrawing : false,
          chosenColor: "black"
        }
+
+       this.isDrawing = false;
      }
    
     buildBoard = (squareSize) => {
@@ -92,12 +95,16 @@ class GameBoard extends React.Component {
               isDrawing={this.state.isDrawing}
               chosenColor={this.state.chosenColor}
               sendPosition={this.sendPosition}
-           />
-          <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/> 
+          />
+          
+          {this.props.isDrawing  
+            ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
+            : <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
+          }
           </div>
-    );
-    }
-    }
+        );
+      }
+}
       
 
 

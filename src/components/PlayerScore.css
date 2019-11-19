@@ -1,19 +1,18 @@
 .PlayerScore{
     width: 95%;
+    
 
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 
     display: flex;
     background-color: brown;
+    position: relative;
 }
 
 .Player{
-    margin:5px;
-    min-width: 100px;
+    margin: 6px 3px; 
+    width: 120px; 
     background-color: orange;
-    transition: 2s ease;
-}
-
-.Player[data-order="1"]{
-    background-color: chartreuse;
+    transition: 1s ease-in-out;
+    position: absolute;
 }

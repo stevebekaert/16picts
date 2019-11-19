@@ -6,6 +6,12 @@
 }
 
 .zone-test{
+    width: 100%;
     height: 100px;
-    display: flex;
+    display: inline-flex;
+}
+
+.player-test{
+    height: 90px;
+    width: 100px;
 }
