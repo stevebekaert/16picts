@@ -16,46 +16,82 @@ class Game extends Component {
       {
         pseudo: 'Luc',
         avatar: './images/Luc.jpg',
-        score: 550
+        score: 550,
+        isDrawing: false,
+        win: false
       },
 
       {
         pseudo: 'Leon',
         avatar: './images/Leon.jpg',
-        score: 100
+        score: 100,
+        isDrawing: false,
+        win: false
       },
 
       {
         pseudo: 'Emilie',
         avatar: './images/Emilie.jpg',
-        score: 1001
+        score: 1001,
+        isDrawing: false,
+        win: false
       },
 
       {
         pseudo: 'Jane',
         avatar: './images/Jane.jpg',
-        score: 225
+        score: 225,
+        isDrawing: true,
+        win: false
       },
       
       {
         pseudo: 'Jack',
         avatar: './images/Jack.jpg',
-        score: 10
+        score: 10,
+        isDrawing: false,
+        win: false
       },
 
       {
         pseudo: 'Mathias',
         avatar: './images/Mathias.jpg',
-        score: 356
+        score: 356,
+        isDrawing: false,
+        win: false
+      },
+
+      {
+        pseudo: 'Cindy',
+        avatar: './images/Cindy.jpg',
+        score: 69,
+        isDrawing: true,
+        win: false
+      },
+      
+      {
+        pseudo: 'John',
+        avatar: './images/John.jpg',
+        score: 785,
+        isDrawing: false,
+        win: false
+      },
+
+      {
+        pseudo: 'Jean-Luc',
+        avatar: './images/Jean-Luc.jpg',
+        score: 236,
+        isDrawing: false,
+        win: false
       }
     ];
 
     this.state = { 
       choices: [],
-      players: this.players
+      players: this.players,
+      gameChosen: [{name: 'The Legend Of Zelda'}],
     }
 
-    
   }
 
   componentDidMount(){
@@ -91,8 +127,6 @@ class Game extends Component {
     });
   }
 
-
-
   updateScore(players, index, score){
     let updatedScore = players.slice(0);
 
@@ -106,14 +140,17 @@ class Game extends Component {
         <div className="game">
             <Timer />
             <div className="game-zone">
-                <GameBoard />
-                <PlayerChoice choices={this.state.choices}/>
+                <GameBoard  
+                  wordToGuess = {this.state.gameChosen[0].name} 
+                  win = {this.state.players[0].win} 
+                  isDrawing = {this.state.players[0].isDrawing} />
+                <PlayerChoice choices={this.state.choices} />
                 <ChatBoard />
             </div>
 
             <div className="zone-test" >
               {this.state.players.map((player, x) => 
-                <div>
+                <div className="player-test">
                   <div>{player.pseudo} score: {player.score}</div>
                   <button onClick={() => {this.updatingScore(x, 100)}} >+100</button>
                   <button onClick={() => {this.updatingScore(x, -100)}} >-100</button>

@@ -1,0 +1,10 @@
+.guess-zone{
+    color: black;
+    display: flex;
+}
+
+.guess-letter{
+    width: 20px;
+    margin: 1px;
+    background-color: lightgrey;
+}
