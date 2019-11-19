@@ -1,9 +1,9 @@
 import React from 'react';
 
-const MessageInput = ({addMessage, confirmMessage, currentMessage}) => {
+const MessageInput = ({addMessage, confirmMessage, currentMessage, gameChosen}) => {
 
     return (
-    <form className="chat-form" onSubmit={(event, currentMessage) => confirmMessage(event, currentMessage)}>
+    <form className="chat-form" onSubmit={(event) => confirmMessage(event)}>
         <input type="text" value={currentMessage} onChange={(event) => addMessage(event)}></input>
     </form>
     )

@@ -98,7 +98,7 @@ app.get('/api/getGame', (req, res) => {
 
 //Asynchronous fonction to get games.
 async function getGames(game) {
-  let response = await fetch('https://www.giantbomb.com/api/search/?api_key=dce469af616144d408b3299fbc5084e8980edabd&field_list=name,deck,image&format=json&query="' + game + '"&resources=franchise');
+  let response = await fetch('https://www.giantbomb.com/api/search/?api_key=dce469af616144d408b3299fbc5084e8980edabd&field_list=name,deck,image,guid&format=json&query="' + game + '"&resources=franchise');
   let dataTemp = await response.json();
   let result = dataTemp.results.filter(result => result.name === game)
   /*console.log("result trouvé: ", result)
@@ -188,7 +188,7 @@ app.get('/api/updateGrid/:lat&:lng&:color', (req, res) => {
         }
         return grid
      }
-     let lat = req.params.lat;
+    let lat = req.params.lat;
     let lng = req.params.lng;
     let color = req.params.lat;
     let myGrid = { grid: grid() }

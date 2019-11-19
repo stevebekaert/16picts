@@ -4,10 +4,9 @@ class Message extends React.Component {
 
     render = () => {
         return (
-            <div
+            <div className="each-message"
                 style={{display:"flex",
                         flexDirection: "column",
-                        marginTop: "5px",
                         position:"relative",
                         }}>
                 <div className="msg-date"

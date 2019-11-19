@@ -43,7 +43,7 @@ class GameBoard extends React.Component {
        if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
             return
           }
-          let updatedBoard = this.updateServerGrid(this.state.board, lat, lng)
+          let updatedBoard = this.updateGrid(this.state.board, lat, lng)
           
           this.setState({
             board: updatedBoard

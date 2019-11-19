@@ -63,6 +63,10 @@
   width:480px;
 }
 
+.chat-zone > :first-child {
+  margin-top: auto !important
+}
+
 .chat-form {
   align-self: end;
   margin-top: 10px;

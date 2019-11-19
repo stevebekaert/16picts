@@ -21,14 +21,14 @@ class PlayerChoiceList extends React.Component {
       let random_numbers = this.randomNumbers()
       let selection = ''
       if(!this.props.gameChosen) {
-        selection =  random_numbers.map((key) =>
-                      <div className="playerchoice-zone" value={choices[key].name} onClick={() => this.props.onClick(choices[key])}>
+        selection =  random_numbers.map((key, id) =>
+                      <div key={id} className="playerchoice-zone" value={choices[key].name} onClick={() => this.props.onClick(choices[key])}>
                         <img className="playerchoice-img" src={choices[key].image.screen_url} alt={choices[key].name}/>
                         <div className="playerchoice-name">{choices[key].name}</div>           
                       </div> )
       } else {
         selection =   <div className="playerchoice-zone">
-                        <div className="playerchoice-name">{this.props.gameChosen.name}</div>           
+                        <div className="playerchoice-name" >{this.props.gameChosen.name}</div>           
                       </div> 
       }
 

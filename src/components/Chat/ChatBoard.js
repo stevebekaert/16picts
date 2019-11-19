@@ -3,11 +3,12 @@ import MessageInput from './MessageInput';
 import AnswerBoard from './AnswerBoard';
 
 class ChatBoard extends Component {
-    messagesEndRef = React.createRef()
+    
     state = {
         currentInput: '',
         isWriting: false,
-        messages: []
+        messages: [],
+        gameChosen: ''
     }
 
     handleChange = (event) => {
@@ -18,8 +19,16 @@ class ChatBoard extends Component {
     }
 
     handleSubmit = (event, messageToAdd) => {
+        console.log("game chosen name",this.state.gameChosen)
         this.setState({ isWriting: false })
-        if (this.state.currentInput !== '') {
+        if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput) {
+            this.setState({
+                messages: this.getNewMessages(true),
+                currentInput: ''
+            })
+            event.preventDefault();
+            }
+        else { if (this.state.currentInput !== '') {
              let newMessages = this.getNewMessages();
              this.setState({
                  messages: newMessages
@@ -27,15 +36,16 @@ class ChatBoard extends Component {
              this.setState({currentInput: ''})
             }
             event.preventDefault();   
-    }
+        }
+    }    
 
-    
-
-    getNewMessages = () => {
+    getNewMessages = (found = false) => {
         let newDate = new Date().toLocaleString();
         let from = this.whoTalk()
         let existingMessages  = this.state.messages;
-        let newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), 
+        let newMessage;
+        found ? newMessage = { content: from + " found the Word", from:"me"} :
+        newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), 
                             sender: from, 
                             date: "On " + newDate }
         existingMessages.push(newMessage)
@@ -47,7 +57,6 @@ class ChatBoard extends Component {
 
     whoTalk = () => {
         var lastChar = this.state.currentInput.slice(-5);
-        console.log(lastChar)
         if(lastChar==="#else") {
             return "someone else"
         } else {
@@ -70,7 +79,8 @@ class ChatBoard extends Component {
                 <MessageInput type="text" 
                             addMessage={this.handleChange}
                             confirmMessage={this.handleSubmit}
-                            currentMessage={this.state.currentInput}>
+                            currentMessage={this.state.currentInput}
+                            gameChosen={this.props.gameChosen}>
                 </MessageInput>
         </div>
         )   

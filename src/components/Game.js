@@ -48,7 +48,7 @@ class Game extends Component {
                       <PlayerChoiceList gameChosen={this.state.gameChosen}/>) :
                   <div style= {{color: "#000000"}}>Loading...</div> }
                 </div>
-                <ChatBoard />
+                <ChatBoard gameChosen={this.state.gameChosen} />
             </div>
   
       </div>

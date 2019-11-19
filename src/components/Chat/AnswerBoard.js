@@ -8,6 +8,7 @@ class AnswerBoard extends Component {
         return (
             this.props.messages.map(message =>
                 <Message
+                    className="each-message"
                     content={message.content}  
                     sender={message.sender} 
                     date={message.date}
