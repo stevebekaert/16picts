@@ -2,9 +2,13 @@ import React from 'react';
 
 class Message extends React.Component {
 
+    componentDidUpdate() {
+        this.newData.scrollIntoView({ behavior: "smooth" })
+    }
+
     render = () => {
         return (
-            <div className="each-message"
+            <div className="each-message" ref={(ref) => this.newData = ref}  
                 style={{display:"flex",
                         flexDirection: "column",
                         position:"relative",

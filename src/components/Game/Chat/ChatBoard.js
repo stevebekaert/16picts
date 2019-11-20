@@ -37,6 +37,7 @@ class ChatBoard extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.setState({ isWriting: false })
+
         this.socket.emit('SEND_MESSAGE', {
             content: this.checkMessage(this.state.currentInput),
             from: this.props.user.pseudo
@@ -44,7 +45,6 @@ class ChatBoard extends Component {
 
         this.setState({currentInput: ''})
     }
-
 
     checkMessage = (msg) => {
         let gameChosenName = this.props.gameChosen.name;
@@ -107,6 +107,7 @@ class ChatBoard extends Component {
         }
     }
     /***************************/
+
 
     render () {
     
