@@ -61,7 +61,7 @@ class PlayerScore extends Component {
                         }}>
                             <div>{player.pseudo}</div>
                             <div>{player.score}</div>
-                            <div>{player.avatar}</div>
+                            <img src={player.avatar}></img>
                             <div>{player.isDrawing ? 'DRAW' : 'GUESS'}</div>
                         </div>
                     )

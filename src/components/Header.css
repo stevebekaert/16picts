@@ -1,7 +1,7 @@
 .heroHeader{
-   /* background-image: linear-gradient( rgba(40, 69, 150, 0.3), rgba(40, 69, 150, 0.3)), url(../images/sky.png); */
+    background-image: linear-gradient( rgba(163, 146, 71, 0.1), rgba(163, 146, 71, 0.1)), url('https://rawfury.com/wp-content/uploads/2018/04/tlnbg.jpg');
     background-size: cover;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
 }
@@ -14,18 +14,22 @@
     font-size: 10vh;
 }
 
+.logoTitle p{
+    font-size: 10vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0px 0px 20px black;
+}
+
 .title1{
-    color: green;
+    color: rgba(39, 146, 105, 0.479);
 }
 
 .title2{
-    color: red;
+    color: rgb(163, 22, 22);
 }
 
 .terrain{
     /* position: relative; */
-    
-    /*background-image: url(../images/terrain.png);*/
     background-size: 110%;
     transform: rotateX(50deg) rotateY(0deg) rotateZ(-20deg);
     width: 100vw;
@@ -59,8 +63,8 @@
     margin: 10%;
     width: 20vw;
     height: 10vh;   
-    background-color: rgba(128, 128, 128, 0.61);
-    border-radius: 3px;
+    background-color: rgba(128, 128, 128, 0.8);
+    border-radius: 4px;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     
 }
@@ -69,7 +73,7 @@
     height: 14vh;
     width: 23vw;
     color: rgba(202, 194, 194, 0.877);
-    background: linear-gradient(to top, rgba(185, 19, 19, 0.705), 20%, rgba(128, 128, 128, 0.705));
+    background: linear-gradient(to top, rgba(64, 73, 116, 0.75), 20%, rgba(117, 113, 113, 0.9));
     border-radius: 3px;
     box-shadow: 0px 0px 7px grey;
     transform: translate3d(0, 0, 0px) rotateX(0deg) rotateY(20deg) rotateZ(0deg);

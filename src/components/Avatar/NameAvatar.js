@@ -12,7 +12,7 @@ import React, { Component } from 'react'
               return (
                 <div className="nameAvatarDisign">
                 <p>Choisis ton pseudo :</p>
-                <input className="nameAvatarInput" type='text' onChange={(event) => this.props.fctNameAvatar(event)} />
+                <input className="nameAvatarInput" type='text' maxlength="8" onChange={(event) => this.props.fctNameAvatar(event)} />
                 </div>
                 
               );
