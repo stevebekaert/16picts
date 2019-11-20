@@ -40,7 +40,7 @@ class ChatBoard extends Component {
              })
              this.setState({currentInput: ''})
             }
-            event.preventDefault();   
+            event.preventDefault();  
         }
     }    
 

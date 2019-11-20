@@ -89,7 +89,7 @@ class Game extends Component {
     this.state = { 
       choices: [],
       isReady : false,
-      players: this.players,
+      players: this.props.user,
       gameChosen: ""
     }
 
@@ -103,6 +103,8 @@ class Game extends Component {
       //.then(data => this.setState({choices: data}))
             /*.catch(error => console.log(this.setState({choices: this.state.choices.push(error)})))*/
   }
+
+
 
   handleChoiceClick = (name) => {
     this.setState({
@@ -127,9 +129,9 @@ class Game extends Component {
   }
 
   handleWin = () =>{
-    let playersUpdated = this.state.players.slice(0);
+    let playersUpdated = this.state.players;
 
-    playersUpdated[0].win = true;
+    playersUpdated.win = true;
 
     this.setState({
       player: playersUpdated
@@ -144,8 +146,8 @@ class Game extends Component {
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
-                  win = {this.state.players[0].win} 
-                  isDrawing = {this.state.players[0].isDrawing} />
+                  win = {this.state.players.win} 
+                  isDrawing = {this.state.players.isdrawer} />
                 <div className="player-choice-zone">
                   {this.state.isReady ?
                     (!this.state.gameChosen ?
@@ -155,17 +157,6 @@ class Game extends Component {
                 </div>
                 <ChatBoard gameChosen={this.state.gameChosen} isWin={this.handleWin} />
             </div>
-
-            <div className="zone-test" >
-              {this.state.players.map((player, x) => 
-                <div className="player-test">
-                  <div>{player.pseudo} score: {player.score}</div>
-                  <button onClick={() => {this.updatingScore(x, 100)}} >+100</button>
-                  <button onClick={() => {this.updatingScore(x, -100)}} >-100</button>
-                </div>
-              )}
-            </div>
-
           <PlayerScore players={this.players} />
       </div>
   );
