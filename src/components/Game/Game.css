@@ -1,0 +1,17 @@
+.drawingBoard-chatBoard{
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 80%;
+}
+
+.zone-test{
+    width: 100%;
+    height: 100px;
+    display: inline-flex;
+}
+
+.player-test{
+    height: 90px;
+    width: 100px;
+}

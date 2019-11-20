@@ -26,11 +26,11 @@ class ChoseImages extends Component{
         //     this.setState({avatar : image});
         //     // console.log(key);
         //    }
-        
+
 
     render(){
         return(
-            <div>
+            <div className="choseImageDisign">
                 <p> Choisis ton avatar :</p>
                 <div className="imagesDisign">
                     {
@@ -39,7 +39,6 @@ class ChoseImages extends Component{
                             <img onClick={() => this.props.fctChoseImage(image)} 
                                 className='imageDisign'
                                 src={image} /></div> )
-                        
                     }
                 </div>
             </div>

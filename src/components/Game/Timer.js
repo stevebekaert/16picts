@@ -15,9 +15,6 @@ class Timer extends Component {
         }
 
         this.initialTime = 10;
-        console.log('initial time:',this.initialTime);
-        console.log('time:',this.initialTime);
-
     }
 
     startTimer = () => {
@@ -28,21 +25,21 @@ class Timer extends Component {
         });
         
         this.timerID = setInterval( () => {
-                this.setState({
-                    time: this.state.time - 1
-                });
+            this.setState({
+                time: this.state.time - 1
+            });
 
-                this.setState({
-                    completion: ((this.state.time-1)*100)/this.initialTime
-                });
+            this.setState({
+                completion: ((this.state.time-1)*100)/this.initialTime
+            });
 
-                if (this.state.time <= 0){
-                    clearInterval(this.timerID);
-                    this.setState({
-                        on: false,
-                    });
-                }
-            }, 1000);
+            if (this.state.time <= 0){
+                clearInterval(this.timerID);
+                this.setState({
+                    on: false,
+                });
+            }
+        }, 1000);
     }
 
 

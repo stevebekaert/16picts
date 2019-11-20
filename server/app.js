@@ -3,12 +3,11 @@ const express = require('express');
 const path = require('path');
 const https = require('https')
 const app = express();
-
-
 const axios = require('axios')
 
+const socketIO = require("socket.io")
 const server = http.createServer(app);
-let reactPath = path.join(__dirname, '../');
+
 let nodePath = path.join(__dirname, '/')
 const fetch = require("node-fetch");
 
@@ -20,15 +19,36 @@ app.use(function (req, res, next) {
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     next();
 });
 
+const io = socketIO(server)
 
 
-/* characters : https://www.giantbomb.com/api/characters/?api_key=dce469af616144d408b3299fbc5084e8980edabd&limit=100&field_list=name,image&format=json */
+io.on("connection", socket => {
+
+  console.log("new client connected " + socket.id);
+  
+  socket.on("SEND_MESSAGE", (data) =>{
+    socket.emit("RECEIVE_MESSAGE", data)
+    socket.broadcast.emit("RECEIVE_MESSAGE", data)
+    });
+
+    socket.on("SEND_POSITION", (data) =>{
+      socket.emit("RECEIVE_POSITION", data)
+      socket.broadcast.emit("RECEIVE_POSITION", data)
+    });
+
+    socket.on("new user", (data) => {
+      data.id = socket.id;
+      socket.emit("add user", data)
+    })
+
+})
+
 
 app.get('/api/get', function(req, res) {
      https.get('https://www.giantbomb.com/api/games/?api_key=dce469af616144d408b3299fbc5084e8980edabd&limit=100&field_list=name,image,number_of_user_reviews&fitler=number_of_user_reviewsgt100&sort=number_of_user_reviews:asc&format=json', (resp) => {
@@ -39,71 +59,17 @@ app.get('/api/get', function(req, res) {
         });
 
         resp.on('end', () => {
-            console.log(data)
             res.send(data)
         });
 
     });
-
-/****** END OF */
 })
-
-/** Class API Answer to create objects of Answers to push into an array */
-class APIAnswer {
-  constructor(name) {
-    this.url = 'https://www.giantbomb.com/api/search/?api_key=dce469af616144d408b3299fbc5084e8980edabd&format=json&query="' + name + '"&resources=franchise'
-    this.name = name;
-  }
-
-   getGame = (name) => {
-     https.get(this.url, (resp) => {
-      let data = '';
-      resp.on('data', (chunk) => { data+=chunk; });
-      resp.on('end', () => {
-        console.log()
-        const JSONParsed = JSON.parse(data)
-        const resultat = JSONParsed.results.filter(result => result.name === name);
-          return resultat
-      });
-      resp.on('error', (error) => console.log(error))
-    })
-  }
-
-  formatAnswer = (name, JSONAnswer) => {
-    console.log("name", name)
-    console.log("JSONAnswer", JSONAnswer)
-    const JSONParsed = JSON.parse(JSONAnswer)
-    const resultat = JSONParsed.results.filter(result => result.name === name);
-    return resultat;
-  }
-
-}
-
-app.get('/api/getGame', (req, res) => {
-  const gameList = ["Mario", "Zelda", "Tomb Raider", "Tetris", "Mega man", "Mario Kart", "Snake", "Minecraft"]
-  let newArray = []
-  gameList.forEach(async game => {
-    console.log("game", game)
-    let gameObject = new APIAnswer(game);
-    let result = await gameObject.getGame(game)
-   /* let resultFiltered = gameObject.formatAnswer(game, result);*/
-    newArray.push(result);
-  })
-  console.log(newArray)
-  return newArray;
-});
-
-
-
 
 //Asynchronous fonction to get games.
 async function getGames(game) {
   let response = await fetch('https://www.giantbomb.com/api/search/?api_key=dce469af616144d408b3299fbc5084e8980edabd&field_list=name,deck,image,guid&format=json&query="' + game + '"&resources=franchise');
   let dataTemp = await response.json();
   let result = dataTemp.results.filter(result => result.name === game)
-  /*console.log("result trouvé: ", result)
-  console.log("data retournée:", data)
-  console.log("Objet simple en position 0 :", result[0]) */
   return result;
 };
 
@@ -115,7 +81,6 @@ app.get('/api/getAxios', async (req, res) => {
   const test = await gameList.map(async (game, key) => {
     //const element = {}
     const objetofElement = await getGames(game)
-      /*.then(data => console.log(data))*/
       .then(data => {   
         return data[0] 
       })
@@ -123,9 +88,10 @@ app.get('/api/getAxios', async (req, res) => {
 
       return await objetofElement
   })
-  Promise.all(test).then((completed) => console.log(res.send(completed)))
+  Promise.all(test).then((completed) => res.send(completed))
 });
 
+/*
 
 let myGrid = ''
 
@@ -195,5 +161,54 @@ app.get('/api/updateGrid/:lat&:lng&:color', (req, res) => {
     myGrid[lat][lng] = color;
     res.send(JSON.stringify(myGrid))
 })
+*/
 
 console.log(nodePath)
+
+
+/** Class API Answer to create objects of Answers to push into an array 
+class APIAnswer {
+  constructor(name) {
+    this.url = 'https://www.giantbomb.com/api/search/?api_key=dce469af616144d408b3299fbc5084e8980edabd&format=json&query="' + name + '"&resources=franchise'
+    this.name = name;
+  }
+
+   getGame = (name) => {
+     https.get(this.url, (resp) => {
+      let data = '';
+      resp.on('data', (chunk) => { data+=chunk; });
+      resp.on('end', () => {
+        console.log()
+        const JSONParsed = JSON.parse(data)
+        const resultat = JSONParsed.results.filter(result => result.name === name);
+          return resultat
+      });
+      resp.on('error', (error) => console.log(error))
+    })
+  }
+
+  formatAnswer = (name, JSONAnswer) => {
+    console.log("name", name)
+    console.log("JSONAnswer", JSONAnswer)
+    const JSONParsed = JSON.parse(JSONAnswer)
+    const resultat = JSONParsed.results.filter(result => result.name === name);
+    return resultat;
+  }
+
+}
+
+app.get('/api/getGame', (req, res) => {
+  const gameList = ["Mario", "Zelda", "Tomb Raider", "Tetris", "Mega man", "Mario Kart", "Snake", "Minecraft"]
+  let newArray = []
+  gameList.forEach(async game => {
+    console.log("game", game)
+    let gameObject = new APIAnswer(game);
+    let result = await gameObject.getGame(game)
+
+    newArray.push(result);
+  })
+  console.log(newArray)
+  return newArray;
+});
+
+*/

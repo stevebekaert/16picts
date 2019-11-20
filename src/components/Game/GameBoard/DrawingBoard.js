@@ -19,6 +19,8 @@ const DrawingBoard = ({board, drawBoard, chosenColor, sendPosition}) =>
                 )}
             </div>
         )}
-        </div>
+    </div>
+
+
 
 export default DrawingBoard;

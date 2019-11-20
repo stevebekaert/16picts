@@ -5,24 +5,21 @@ import Message from './Message'
 class AnswerBoard extends Component {
 
     render() {
+        console.log("from answerBoard", this.props.messages)
         return (
             this.props.messages.map(message =>
                 <Message
                     content={message.content}  
-                    sender={message.sender} 
+                    sender={message.from} 
                     date={message.date}
-                    style={{
-                        backgroundColor: "blue",
-                        borderRadius: "20px",
-                        border: "1px solid #c3c3c3",
-                        padding: "0 18px 10px",
-                        marginBottom: "20px"
-                    }}
+                    user={this.props.user || {pseudo : "undefined"}} 
                 />
-            
             )
         )
     }
+
 }
+
+
 
 export default AnswerBoard;

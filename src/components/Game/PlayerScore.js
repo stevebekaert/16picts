@@ -43,7 +43,12 @@ class PlayerScore extends Component {
         } 
     }
 
-    
+    setTranslate = (rank) => {
+        let purcentOfTranslate = 0
+        purcentOfTranslate = purcentOfTranslate + ((rank-1)*104);
+        return purcentOfTranslate;
+    }
+
     render(){
       return(
             <div className="PlayerScore">
@@ -51,7 +56,8 @@ class PlayerScore extends Component {
                 {this.props.players.map(player => {
                     return(
                         <div className="Player" data-order={player.rank} style={{
-                            order: player.rank
+                            transform: `translate(${this.setTranslate(player.rank)}%)`,
+                            /*zIndex: `${player.rank}`*/
                         }}>
                             <div>{player.pseudo}</div>
                             <div>{player.score}</div>
