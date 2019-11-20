@@ -44,6 +44,8 @@ io.on("connection", socket => {
 
     socket.on("new user", (data) => {
       data.id = socket.id;
+      data.score = 0;
+      console.log(data)
       socket.emit("add user", data)
     })
 

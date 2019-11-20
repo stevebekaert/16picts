@@ -95,14 +95,14 @@ class Game extends Component {
       gameChosen: "",
       connectedPlayer: []
     }
-    /*this.socket = socketIOClient('http://192.168.0.105:8080')
+    this.socket = socketIOClient('http://192.168.0.105:8080')
     this.socket.on("add user", data =>
       this.addUser(data)
-      )*/
+      )
   }
 
   addUser = (user) => {
-    this.setState([...this.state.players, user])
+    this.setState({players:[...this.state.players, user]})
   }
 
   componentDidMount = () => {
@@ -111,7 +111,7 @@ class Game extends Component {
       .then(response => this.setState({choices: response, isReady: true}))
       //.then(data => this.setState({choices: data}))
             /*.catch(error => console.log(this.setState({choices: this.state.choices.push(error)})))*/
-      //this.socket.emit("new user", this.props.user)
+      this.socket.emit("new user", this.props.user)
   }
 
   handleChoiceClick = (name) => {
@@ -165,7 +165,7 @@ class Game extends Component {
                 </div>
                 <ChatBoard user={this.props.user} gameChosen={this.state.gameChosen} isWin={this.handleWin} />
             </div>
-          <PlayerScore players={this.players} />
+          <PlayerScore players={this.state.players} />
       </div>
   );
   }
