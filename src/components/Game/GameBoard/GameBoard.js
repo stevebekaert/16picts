@@ -14,7 +14,6 @@ class GameBoard extends React.Component {
          chosenColor: "black"
        }
 
-       this.isDrawing = false;
      }
 
     /* componentDidMount() {
@@ -44,7 +43,7 @@ class GameBoard extends React.Component {
     }
    
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
+       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing || !this.props.currentPlayer.isDrawer){
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -69,7 +68,7 @@ class GameBoard extends React.Component {
 
     sendPosition = (lat, lng) => {
 
-      if (this.state.board[lat][lng] === this.state.chosenColor) {
+      if (this.state.board[lat][lng] === this.state.chosenColor || !this.props.currentPlayer.isDrawer){
         return 
       }
       let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -112,9 +111,9 @@ class GameBoard extends React.Component {
               sendPosition={this.sendPosition}
           />
           
-          {this.props.isDrawing  
+          {this.props.currentPlayer.isDrawer  
             ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
-            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
+            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.currentPlayer.win} />
           }
           </div>
         );

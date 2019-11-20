@@ -90,8 +90,9 @@ class Game extends Component {
     this.state = { 
       choices: [],
       isReady : false,
-      players: this.props.user,
-      gameChosen: ""
+      players: this.players,
+      gameChosen: "",
+      currentPlayer: this.props.user,
     }
 
   }
@@ -147,13 +148,15 @@ class Game extends Component {
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
-                  win = {this.state.players.win} 
-                  isDrawing = {this.state.players.isDrawer} />
+                  currentPlayer={this.state.currentPlayer}/>
                 
-                <ChatBoard gameChosen={this.state.gameChosen} isWin={this.handleWin} />
+                <ChatBoard 
+                  gameChosen={this.state.gameChosen} 
+                  isWin={this.handleWin} 
+                  currentPlayer={this.state.currentPlayer}/>
             </div>
 
-            {!this.state.gameChosen 
+            {!this.state.gameChosen && this.state.currentPlayer.isDrawer
             ?<div className="player-choice-zone">   
               {this.state.isReady 
               ? <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} /> 

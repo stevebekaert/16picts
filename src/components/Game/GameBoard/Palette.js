@@ -8,7 +8,7 @@ class Palette extends React.Component {
 
     render() {
         return (
-            <div className="Hello">
+            <div className="drawer-option">
                 <div className="color-container">
                     {this.availableColors.map(color => 
                         <ColorOption key={color} chooseColor={this.props.chooseColor} color={color} />

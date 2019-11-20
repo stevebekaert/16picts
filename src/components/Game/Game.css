@@ -245,3 +245,58 @@
     margin: 1px;
     background-color: lightgrey;
 }
+
+
+/*DRAWER OPTION*/
+.color-container{
+    display:flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+    height: 40px;
+    border: 1px solid #c3c3c3;
+    margin-top: 10px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    align-items:center;
+  }
+  
+  .color-container:last-child {
+    border: 1px solid #c3c3c3
+  }
+  
+  .color-option {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+  
+  .option-container{
+    margin-top: 10px;
+    color: #000;
+    height: 40px;
+    border: 1px solid #c3c3c3;;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    font-size: 11px;
+    width: 25%;
+    align-items:center;
+    transition: background-color 0.5s linear, color 0.5s linear;
+    color: #65b2df;
+  }
+  
+  .option-container:hover {
+    background-color: #65b2df;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s linear, color 0.5s linear;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .error {
+    font-size: 10px;
+    background-color:red;
+    color: #fff;
+  }

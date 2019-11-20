@@ -55,7 +55,7 @@ class App extends Component{
               selectNameAvatar={(event) => this.myChangeName(event)}
               selectIdAvatar={(event) => this.sendUserToGamePage(event)}
 
-              isdrawer={this.state.isdrawer} />}>
+              isDrawer={this.state.isDrawer} />}>
             </Route>
 
             
