@@ -1,5 +1,6 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
+import MessageInDrowingBoard from './MessageInDrowingBoard';
 import Palette from './Palette';
 import GuessZone from '../Guesser/GuessZone';
 
@@ -41,7 +42,7 @@ class GameBoard extends React.Component {
 
        return grid
     }
-   
+
     drawBoard = (lat, lng) => {
        if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing || !this.props.currentPlayer.isDrawer){
             return
@@ -103,16 +104,20 @@ class GameBoard extends React.Component {
                  height: "480px",
                  width: "480px"
                }}>
-          <DrawingBoard
-              board={board}
-              drawBoard={this.drawBoard}
-              isDrawing={this.state.isDrawing}
-              chosenColor={this.state.chosenColor}
-              sendPosition={this.sendPosition}
-          />
-          
+              { !this.props.wordToGuess && !this.props.currentPlayer.isDrawer
+                ? <MessageInDrowingBoard />
+                : <DrawingBoard
+                board={board}
+                drawBoard={this.drawBoard}
+                isDrawing={this.state.isDrawing}
+                chosenColor={this.state.chosenColor}
+                sendPosition={this.sendPosition} />
+              }
           {this.props.currentPlayer.isDrawer  
-            ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
+            ? <Palette 
+            resetGrid={this.resetGrid} 
+            chooseColor={this.handleColorSelection}
+            wordToGuess={this.props.wordToGuess}/>
             : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.currentPlayer.win} />
           }
           </div>
