@@ -2,6 +2,7 @@ import React from 'react';
 import DrawingBoard from './DrawingBoard';
 import Palette from './Palette';
 import GuessZone from '../Guesser/GuessZone';
+import socketIOClient from 'socket.io-client'
 
 class GameBoard extends React.Component {
      constructor(props){
@@ -15,7 +16,17 @@ class GameBoard extends React.Component {
        }
 
        this.isDrawing = false;
+       this.socket = socketIOClient('http://10.0.0.10:8080')
+       this.socket.on("gridUpdating", data => {
+         this.updateGridFromDrawer(data)
+       })
      }
+
+    updateGridFromDrawer = (grid) => {
+      this.setState({
+        board: grid
+      })
+    }
 
     buildBoard = (squareSize) => {
        let grid = [];
@@ -34,7 +45,7 @@ class GameBoard extends React.Component {
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
-          
+          this.socket.emit("drawing", updatedBoard)
           this.setState({
             board: updatedBoard
           })

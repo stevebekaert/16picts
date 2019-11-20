@@ -173,7 +173,9 @@ class Game extends Component {
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
                   /*win = {this.state.players[0].win} 
-                  isDrawing = {this.state.players[1].isDrawing}*/ />
+                  isDrawing = {this.state.players[1].isDrawing}*/ 
+                  socket={this.socket}/>
+                   
                 <div className="player-choice-zone">
                   {this.state.isReady ?
                     (!this.state.gameChosen ?

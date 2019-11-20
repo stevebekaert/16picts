@@ -53,6 +53,10 @@ io.on("connection", socket => {
       socket.broadcast.emit("warn new user", {existingUsers: existingPlayers})
     })
 
+    socket.on("drawing", (data) => {
+      socket.broadcast.emit("gridUpdating", data )
+    })
+
 })
 
 
