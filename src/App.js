@@ -12,7 +12,7 @@ class App extends Component{
       pseudo : '',
       avatar : '',
       id : '',
-      isdrawer: false,
+      isDrawer: false,
   } 
   }
 
@@ -31,7 +31,7 @@ class App extends Component{
   }
 
   handleClickToCreateGame = () => {
-    this.setState({isdrawer : true});
+    this.setState({isDrawer : true});
 }
 
   render(){

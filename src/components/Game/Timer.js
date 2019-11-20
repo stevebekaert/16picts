@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { setInterval, clearInterval } from 'timers';
 
-import './Timer.css'
+import './Game.css'
 
 
 

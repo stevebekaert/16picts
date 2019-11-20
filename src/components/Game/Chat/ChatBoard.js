@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import MessageInput from './MessageInput';
 import AnswerBoard from './AnswerBoard';
 
-import './chatBoard.css'
+import '../Game.css'
 
 
 

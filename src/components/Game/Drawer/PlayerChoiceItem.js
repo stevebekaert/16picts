@@ -1,5 +1,5 @@
 import React from 'react'
-import './Playerchoice.css'
+import '../Game.css'
 
 class PlayerChoiceItem extends React.Component {
 
