@@ -8,7 +8,7 @@ class GameBoard extends React.Component {
        super(props)
    
        this.state = {
-         /*board: [[0,0], [0,0]],*/
+
          board: this.buildBoard(40),
          isDrawing : false,
          chosenColor: "black"
@@ -16,20 +16,6 @@ class GameBoard extends React.Component {
 
        this.isDrawing = false;
      }
-
-    /* componentDidMount() {
-       this.callNewGrid()
-     }
-
-    callNewGrid = () => {
-      fetch('http://localhost:8080/api/createGrid')
-      .then(response => response.json())
-      .then(data => 
-        {
-          console.log(data.grid)
-          this.setState({board: data.grid})
-        })
-    }*/
 
     buildBoard = (squareSize) => {
        let grid = [];
@@ -44,7 +30,7 @@ class GameBoard extends React.Component {
     }
    
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
+       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing) {
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -114,7 +100,7 @@ class GameBoard extends React.Component {
           
           {this.props.isDrawing  
             ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
-            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
+            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} /*win={this.props.win}*/ />
           }
           </div>
         );

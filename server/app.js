@@ -27,11 +27,12 @@ app.use(function (req, res, next) {
 
 const io = socketIO(server)
 
+let existingPlayers = [];
 
 io.on("connection", socket => {
 
   console.log("new client connected " + socket.id);
-  
+
   socket.on("SEND_MESSAGE", (data) =>{
     socket.emit("RECEIVE_MESSAGE", data)
     socket.broadcast.emit("RECEIVE_MESSAGE", data)
@@ -46,7 +47,10 @@ io.on("connection", socket => {
       data.id = socket.id;
       data.score = 0;
       console.log(data)
-      socket.emit("add user", data)
+      existingPlayers.push(data)
+      //data is my CurrentUser, existingPlayers is an array updated.
+      socket.emit("add user", {newUser: data, existingUsers: existingPlayers})
+      socket.broadcast.emit("warn new user", {existingUsers: existingPlayers})
     })
 
 })

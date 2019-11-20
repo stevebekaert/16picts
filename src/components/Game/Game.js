@@ -91,18 +91,35 @@ class Game extends Component {
     this.state = { 
       choices: [],
       isReady : false,
-      players: this.players,
+      players:[],
       gameChosen: "",
-      connectedPlayer: []
+      connectedPlayer: [],
+      currentPlayer: ''
     }
-    this.socket = socketIOClient('http://192.168.0.105:8080')
-    this.socket.on("add user", data =>
-      this.addUser(data)
-      )
+    this.socket = socketIOClient('http://10.0.0.10:8080') //'http://192.168.0.105:8080'
+    this.socket.on("add user", data =>{
+      let user = data.newUser;
+      let existingUsers = data.existingUsers;
+      this.addUser(user, existingUsers)
+    })
+    this.socket.on("warn new user", data => {
+      let existingUsers = data.existingUsers;
+      this.updateUsersList(existingUsers)
+    })
+
   }
 
-  addUser = (user) => {
-    this.setState({players:[...this.state.players, user]})
+  addUser = (user, existingUsers) => {
+    this.setState({
+      currentPlayer: user,
+      players: [...existingUsers]
+    })
+  }
+
+  updateUsersList = (existingList) => {
+    this.setState({
+      players: [...existingList]
+    })
   }
 
   componentDidMount = () => {
@@ -111,6 +128,7 @@ class Game extends Component {
       .then(response => this.setState({choices: response, isReady: true}))
       //.then(data => this.setState({choices: data}))
             /*.catch(error => console.log(this.setState({choices: this.state.choices.push(error)})))*/
+      this.socket.emit("existing users")
       this.socket.emit("new user", this.props.user)
   }
 
@@ -154,8 +172,8 @@ class Game extends Component {
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
-                  win = {this.state.players[0].win} 
-                  isDrawing = {this.state.players[1].isDrawing} />
+                  /*win = {this.state.players[0].win} 
+                  isDrawing = {this.state.players[1].isDrawing}*/ />
                 <div className="player-choice-zone">
                   {this.state.isReady ?
                     (!this.state.gameChosen ?

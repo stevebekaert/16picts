@@ -13,7 +13,8 @@ class App extends Component{
       avatar : '',
       id : '',
       isdrawer: false,
-  } 
+    } 
+    
   }
 
   handleClick = (image) => {
