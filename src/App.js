@@ -5,10 +5,6 @@ import Header from './components/Header.js';
 import Game from './components/Game/Game.js';
 import './App.css'
 
-import io from 'socket.io-client';
-const socket = io('http://localhost:8000');
-
-
 class App extends Component{
 
   constructor(props) {
@@ -18,7 +14,7 @@ class App extends Component{
       avatar : '',
       id : '',
       isDrawer: false,
-  } 
+    } 
   }
 
   handleClick = (image) => {
