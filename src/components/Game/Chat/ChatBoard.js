@@ -34,7 +34,7 @@ class ChatBoard extends Component {
         this.setState({ currentInput: event.target.value });
     }
 
-    handleSubmit = (event) => {
+    /*handleSubmit = (event) => {
         event.preventDefault();
         this.setState({ isWriting: false })
 
@@ -44,7 +44,7 @@ class ChatBoard extends Component {
         })
 
         this.setState({currentInput: ''})
-    }
+    }*/
 
     checkMessage = (msg) => {
         let gameChosenName = this.props.gameChosen.name;
@@ -56,55 +56,49 @@ class ChatBoard extends Component {
         return msg
     }
 
-/* working without socket
     handleSubmit = (event, messageToAdd) => {
+        event.preventDefault();
+        let newDate = new Date().toLocaleString();
+        let from = this.whoTalk()
         this.setState({ isWriting: false })
-        if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput && this.props.currentPlayer.isDrawer) {
-            this.setState({
-                messages: this.getNewMessages(true),
-                currentInput: ''
+        if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput) {
+            let newMessages = this.createNewMessage(true, this.props.currentPlayer.isDrawer, from, newDate) ;
+            this.socket.emit('SEND_MESSAGE', {
+                content: newMessages.content,
+                from: this.props.currentPlayer.pseudo 
             })
             this.props.isWin();
-            event.preventDefault();
-            }
-        else { if (this.state.currentInput !== '' || this.props.currentPlayer.isDrawer) {
-             let newMessages = this.getNewMessages();
-             this.setState({
-                 messages: newMessages
-             })
-             this.setState({currentInput: ''})
-            }
 
-            this.socket.emit("message", "Hello")
-
-            event.preventDefault();   
-        }
+            }
+        else if (this.state.currentInput !== '') {
+             let newMessages = this.createNewMessage(false, this.props.currentPlayer.isDrawer, from, newDate);
+             this.socket.emit('SEND_MESSAGE', {
+                content: newMessages.content,
+                from: this.props.currentPlayer.pseudo 
+                })
+            }
+        this.setState({currentInput: ''})
     }    
 
-    getNewMessages = (found = false) => {
+    
+    /*getNewMessages = (found = false) => {
         let newDate = new Date().toLocaleString();
         let from = this.whoTalk()
         let existingMessages  = this.state.messages;
-        
-        
-        /*found ? newMessage = { content: from + " found the Word", from:"me"} :
-        newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), 
-                            sender: from, 
-                            date: "On " + newDate }
         let newMessage = this.createNewMessage(found, this.props.currentPlayer.isDrawer, from, newDate)
         existingMessages.push(newMessage)
 
         return existingMessages;
-    } 
-/*
+    } */
 
+    
     createNewMessage = (found, isDrawer, from, date) =>{
         let messageCreated = {};
         if (found && isDrawer){
             messageCreated.content = "Drawer can't post the answer.";   
         } 
         else if(found && !isDrawer){
-            messageCreated.content = from + 'Found de word';
+            messageCreated.content = from + 'guessed the word !';
         }
         else {
             messageCreated.content = this.state.currentInput;
@@ -134,7 +128,7 @@ class ChatBoard extends Component {
             <div className="answer-zone">   
                 <AnswerBoard
                     messages={this.state.messages}
-                    user={this.props.currentPlayer.pseudo }>
+                    user={this.props.currentPlayer }>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
             

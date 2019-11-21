@@ -99,7 +99,6 @@ class Game extends Component {
     }
     this.socket = socketIOClient('http://192.168.0.105:8080') //'http://192.168.0.105:8080'
     this.socket.on("add user", data =>{
-      
       let user = data.newUser;
       let existingUsers = data.existingUsers;
       this.addUser(user, existingUsers)
@@ -108,7 +107,17 @@ class Game extends Component {
       let existingUsers = data.existingUsers;
       this.updateUsersList(existingUsers)
     })
+    this.socket.on("chosenGame", data => {
+      let chosenGame = data;
+      this.updateChosenGame(chosenGame)
+    })
 
+  }
+
+  updateChosenGame = (game) => {
+    this.setState({
+      gameChosen: game
+    })
   }
 
   addUser = (user, existingUsers) => {
