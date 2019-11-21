@@ -16,7 +16,7 @@ class GameBoard extends React.Component {
        }
 
        this.isDrawing = false;
-       this.socket = socketIOClient('http://10.0.0.10:8080')
+       this.socket = socketIOClient('http://192.168.0.105:8080')
        this.socket.on("gridUpdating", data => {
          this.updateGridFromDrawer(data)
        })

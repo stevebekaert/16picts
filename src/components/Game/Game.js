@@ -96,7 +96,7 @@ class Game extends Component {
       connectedPlayer: [],
       currentPlayer: ''
     }
-    this.socket = socketIOClient('http://10.0.0.10:8080') //'http://192.168.0.105:8080'
+    this.socket = socketIOClient('http://192.168.0.105:8080') //'http://192.168.0.105:8080'
     this.socket.on("add user", data =>{
       let user = data.newUser;
       let existingUsers = data.existingUsers;
