@@ -50,6 +50,7 @@
     justify-content: space-between;
 
     width: 100%;
+    height: 584px;
     min-width: 480px;
     margin-left: 2%;
 }
@@ -59,10 +60,11 @@
     flex-direction:column;
 
     height: 88%;
+    max-height: 88%;
     margin-bottom: 3%;
 
     padding: 0 18px 10px;
-    overflow-y: auto;
+    overflow: auto;
 
     background-color: rgba(56, 66, 94, 0.5);
     border: 1px solid #c3c3c3;
@@ -295,14 +297,18 @@ input[type="text"] {
 
 /*DRAWER OPTION*/
 .drawer-option{
-    margin-top: 4%;
+    margin-top: 10px;
 }
 
 .option-game-chosed{
-    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    margin-left: 2%;
     height: 40px;
     margin-top: 10px;
-    
 
     background-color: rgba(56, 66, 94, 0.5);
     border: 1px solid #c3c3c3;
@@ -338,8 +344,13 @@ input[type="text"] {
     height: 14px;
     cursor: pointer;
   }
-  
-  .option-container{
+
+.option-container{
+    display: flex;
+    
+}
+
+.option-button{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -356,19 +367,19 @@ input[type="text"] {
     color: #65b2df;
     font-size: 1.2em;
     font-weight: 500;
-    
+
     transition: all 0.3s ease-in;
-  }
-  
-  .option-container:hover {
+}
+
+.option-button:hover {
     background-color: #65b2df;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease-in;
-  }
-  
-  .error {
+}
+
+.error {
     font-size: 10px;
     background-color:red;
     color: #fff;
-  }
+}

@@ -20,11 +20,15 @@ class Palette extends React.Component {
                         <ColorOption key={color} chooseColor={this.props.chooseColor} color={color} />
                     )}
                 </div>
-                <div className="option-container"
-                    onClick={() => this.props.resetGrid()}>
-                    <div>RESET</div>
+                <div className="option-container" >
+                    <div className="option-button"
+                        onClick={() => this.props.resetGrid()}>
+                        <div>RESET</div>
+                    </div>
+                    <div className="option-game-chosed" >
+                        <div>{this.props.wordToGuess}</div>
+                    </div>
                 </div>
-                    <div className="option-game-chosed" >{this.props.wordToGuess}</div>
             </div>
         )
     }
