@@ -3,6 +3,12 @@ import ColorOption from './ColorOption';
 
 
 class Palette extends React.Component {
+    constructor(props){
+        super(props)
+    
+        this.state = {
+        }
+     }
 
     availableColors = ["#65b2df", "#5bcc8b", "#e6bb46", "#dfb665", "#df7065", "#c365df", "grey", "#000000", 0] 
 
@@ -18,6 +24,7 @@ class Palette extends React.Component {
                     onClick={() => this.props.resetGrid()}>
                     <div>RESET</div>
                 </div>
+                    <p>{this.props.wordToGuess}</p>
             </div>
         )
     }
