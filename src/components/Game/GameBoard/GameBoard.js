@@ -1,35 +1,33 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
+import MessageInDrowingBoard from './MessageInDrowingBoard';
 import Palette from './Palette';
 import GuessZone from '../Guesser/GuessZone';
+import socketIOClient from 'socket.io-client'
 
 class GameBoard extends React.Component {
      constructor(props){
        super(props)
    
        this.state = {
-         /*board: [[0,0], [0,0]],*/
+
          board: this.buildBoard(40),
          isDrawing : false,
          chosenColor: "black"
        }
 
        this.isDrawing = false;
+       this.socket = socketIOClient('http://192.168.0.251:8080')
+       this.socket.on("gridUpdating", data => {
+         this.updateGridFromDrawer(data)
+       })
      }
 
-    /* componentDidMount() {
-       this.callNewGrid()
-     }
-
-    callNewGrid = () => {
-      fetch('http://localhost:8080/api/createGrid')
-      .then(response => response.json())
-      .then(data => 
-        {
-          console.log(data.grid)
-          this.setState({board: data.grid})
-        })
-    }*/
+    updateGridFromDrawer = (grid) => {
+      this.setState({
+        board: grid
+      })
+    }
 
     buildBoard = (squareSize) => {
        let grid = [];
@@ -42,13 +40,13 @@ class GameBoard extends React.Component {
 
        return grid
     }
-   
+
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing){
+       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing || !this.props.currentPlayer.isDrawer){
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
-          
+          this.socket.emit("drawing", updatedBoard)
           this.setState({
             board: updatedBoard
           })
@@ -69,7 +67,7 @@ class GameBoard extends React.Component {
 
     sendPosition = (lat, lng) => {
 
-      if (this.state.board[lat][lng] === this.state.chosenColor) {
+      if (this.state.board[lat][lng] === this.state.chosenColor || !this.props.currentPlayer.isDrawer){
         return 
       }
       let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -96,25 +94,30 @@ class GameBoard extends React.Component {
 
    render(){
       const { board } = this.state
+
       return(
-          <div className='board-canvas' 
+          <div className='game-zone-left' 
                onMouseDown={this.handleMouseDown} 
                onMouseUp={this.handleMouseUp}
-               style={{
-                 height: "480px",
-                 width: "480px"
-               }}>
-          <DrawingBoard
-              board={board}
-              drawBoard={this.drawBoard}
-              isDrawing={this.state.isDrawing}
-              chosenColor={this.state.chosenColor}
-              sendPosition={this.sendPosition}
-          />
-          
-          {this.props.isDrawing  
-            ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
-            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.win} />
+              >
+                
+          { !this.props.wordToGuess && !this.props.currentPlayer.isDrawer
+      
+            ? <MessageInDrowingBoard />
+            : <DrawingBoard
+            board={board}
+            drawBoard={this.drawBoard}
+            isDrawing={this.state.isDrawing}
+            chosenColor={this.state.chosenColor}
+            sendPosition={this.sendPosition} />
+          }
+
+          {this.props.currentPlayer.isDrawer  
+            ? <Palette 
+            resetGrid={this.resetGrid} 
+            chooseColor={this.handleColorSelection}
+            wordToGuess={this.props.wordToGuess}/>
+            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.currentPlayer.win} />
           }
           </div>
         );
