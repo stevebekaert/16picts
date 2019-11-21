@@ -16,7 +16,7 @@ class Palette extends React.Component {
                 </div>
                 <div className="option-container"
                     onClick={() => this.props.resetGrid()}>
-                    <p>reset</p>
+                    <div>RESET</div>
                 </div>
             </div>
         )

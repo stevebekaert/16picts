@@ -19,67 +19,103 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:100vw;
-    height: 100vh;
-    background-image: linear-gradient( rgba(163, 146, 71, 0.1), rgba(163, 146, 71, 0.1)), url('https://rawfury.com/wp-content/uploads/2018/04/tlnbg.jpg');
-    background-size: cover;
+
+    width: 90%;
+    min-width: 1020px;
+    max-width: 1150px;
+    padding: 1.5%;
+    margin-top: 20px;
+
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
 }
 
-  .game-zone {
-    text-align: center;
-    /*min-height: 100vh;*/
+.game-zone {
     display: flex;
     flex-direction: row;
-    /*align-items: center;*/
     justify-content: space-evenly;
-    font-size: calc(10px + 2vmin);
-    color: white;
+
     width:100%;
+
+    color: white;
+    text-align: center;
     font-family: 'Open Sans', sans-serif;
 }    
 
 
 /*CHAT*/
-.chat-zone {
+.chat-zone{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    min-width: 480px;
+    margin-left: 2%;
+}
+
+.answer-zone {
     display:flex;
     flex-direction:column;
-    height: 50vh;
-    background-color: rgba(56, 66, 94, 0.5);
-    border: 1px solid #c3c3c3;
-    padding:0;
-    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
-    border-radius:4px;
-    text-align:left;
-    color: #000;
+
+    height: 88%;
+    margin-bottom: 3%;
+
     padding: 0 18px 10px;
     overflow-y: auto;
-    width:480px;
-    height: 89%;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    border-radius:4px;
+
+    text-align:left;
+    color: #000;
 }
   
-.chat-zone > :first-child {
+.answer-zone > :first-child {
     margin-top: auto !important
 }
   
 .chat-form {
-    align-self: end;
-    margin-top: 10px;
-    padding:0;
-    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    width: 100%;
+    height: 7%;
 }
   
 .chat-form input{
     background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
 }
   
 .msg-content {
     color:white;
 }
 
+input[type="text"] {
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+
+    box-sizing: border-box;
+    
+    color: white;
+    font-size: 1.3em;
+}
+
 
 /*GAME BOARD*/
 .board-canvas {
-    border: solid rgba(0, 0, 0, 0.281) 1px;
+    width: 480px;
+    height: 480px;
+
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    background-color: rgba(56, 66, 94, 0.5);
 }
   
 .row {
@@ -97,43 +133,44 @@
 }
   
 .cell {
-    
     height: 9.95px;
-    border: 1px solid rgba(94, 90, 90, 0.548);
-}
-
-.board-canvas {
-  box-sizing: border-box;
-  box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    border: 1px solid rgba(212, 199, 199, 0.5);
 }
 
 
 /*PLAYER SCORE*/
 .PlayerScore{ 
-    width: 95%;
-    height: 100%;
     display: flex;
-    /* align-items: flex-end; */
-    /* justify-content: center;     */
 
-    margin-top: 50px;
-
-    /* background-color: brown; */
     position: relative;
+
+    width: 100%;
+    height: 132px;
+    margin-top: 20px;
+
+    background-color: rgba(56, 66, 94, 0.5); 
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .Player{
-    margin: 6px 3px; 
-    width: 120px; 
-    background-color: rgba(56, 66, 94, 0.5);
-    transition: 1s ease-in-out;
     position: absolute;
+
+    width: 120px; 
+    height: 120px;
+    margin: 6px; 
+
+    background-color: rgba(56, 66, 94, 1);
+    border-radius: 4px;
+    
     color: rgba(255, 255, 255, 0.596);
+
+    transition: 1s ease-in-out;
 }
 
 .Player img{
     width: 50%;
-    height: 8vh;
 }
 
 
@@ -153,20 +190,28 @@
 }
 
 .timer-zone {
-    width:76%;
     display:flex;
     flex-direction:column;
-    align-items:center
+    align-items:center;
+
+    width:100%;
+    margin-bottom: 1.5%; 
 }
 
 .timer-bar-zone{
-    width: 100%;
-    height: 0.5vh; 
-    border: 1px solid #C3C3C3;
     display: flex;
-    overflow: hidden;
-    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+
+    width: 100%;
+    height: 2vh; 
     padding: 2px;
+    
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    overflow: hidden;
+
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    background-color: rgba(56, 66, 94, 0.5);
 }
 
 .timer-completion{
@@ -214,9 +259,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 80vw;
-    height: 80vh;
-    margin-top: 5vh;
+    width: 90vw;
+    max-width: 1160px;
+    height: 74vh;
+    margin-top: -1vh;
     position: absolute;
 }
 
@@ -248,15 +294,22 @@
 
 
 /*DRAWER OPTION*/
+.drawer-option{
+    margin-top: 4%;
+}
+
 .color-container{
     display:flex; 
     flex-direction: row; 
     justify-content: space-evenly;
-    height: 40px;
-    border: 1px solid #c3c3c3;
-    margin-top: 10px;
-    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
     align-items:center;
+
+    height: 40px;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
   }
   
   .color-container:last-child {
@@ -271,28 +324,31 @@
   }
   
   .option-container{
-    margin-top: 10px;
-    color: #000;
-    height: 40px;
-    border: 1px solid #c3c3c3;;
-    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
-    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 25%;
-    align-items:center;
-    transition: background-color 0.5s linear, color 0.5s linear;
+    height: 40px;
+    margin-top: 10px;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+
     color: #65b2df;
+    font-size: 1.2em;
+    font-weight: 500;
+    
+    transition: all 0.3s ease-in;
   }
   
   .option-container:hover {
     background-color: #65b2df;
     color: white;
     cursor: pointer;
-    transition: background-color 0.5s linear, color 0.5s linear;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    box-sizing: border-box;
+    transition: all 0.3s ease-in;
   }
   
   .error {

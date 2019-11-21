@@ -1,6 +1,4 @@
 .avatarPage{
-    background-image: linear-gradient( rgba(163, 146, 71, 0.1), rgba(163, 146, 71, 0.1)), url('https://rawfury.com/wp-content/uploads/2018/04/tlnbg.jpg');
-    background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;

@@ -54,12 +54,12 @@ class Timer extends Component {
     render(){
         return (
             <div className="timer-zone" >
-                <button onClick={this.startTimer} >GO</button>
+                {/* <button onClick={this.startTimer} >GO</button>
                 <button onClick={this.initializeTimer}>RESET</button>
 
                 <div className= {this.state.on ? 'stop-on' : 'stop-off'} >
                     {this.state.on ? 'EN COURS' : 'STOP'}
-                </div>
+                </div> */}
 
                 <div className= 'timer-bar-zone'>
                     <div className='timer-completion' style={{

@@ -159,7 +159,7 @@ class Game extends Component {
             {!this.state.gameChosen && this.state.currentPlayer.isDrawer
             ?<div className="player-choice-zone">   
               {this.state.isReady 
-              ? <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} /> 
+              ? <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} />
               : <div style= {{color: "#000000"}}>Loading...</div> }
             </div>
             : null}

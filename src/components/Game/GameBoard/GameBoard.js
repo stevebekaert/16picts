@@ -96,13 +96,12 @@ class GameBoard extends React.Component {
    render(){
       const { board } = this.state
       return(
-          <div className='board-canvas' 
+          <div className='game-zone-left' 
                onMouseDown={this.handleMouseDown} 
                onMouseUp={this.handleMouseUp}
-               style={{
-                 height: "480px",
-                 width: "480px"
-               }}>
+          >
+
+            
           <DrawingBoard
               board={board}
               drawBoard={this.drawBoard}

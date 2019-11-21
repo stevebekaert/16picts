@@ -91,8 +91,8 @@ class ChatBoard extends Component {
     render () {
     
         return (
-        <div>
-            <div className="chat-zone">   
+        <div className="chat-zone">
+            <div className="answer-zone">   
                 <AnswerBoard
                     messages={this.state.messages}>
                 </AnswerBoard>
