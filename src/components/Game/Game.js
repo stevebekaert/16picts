@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import './Game.css';
+
 import GameBoard from './GameBoard/GameBoard.js'
 import ChatBoard from './Chat/ChatBoard.js'
 import PlayerChoiceList from './Drawer/PlayerChoiceList'
@@ -17,7 +18,7 @@ class Game extends Component {
     this.players = [
       {
         pseudo: 'Luc',
-        avatar: './images/Luc.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 550,
         isDrawing: false,
         win: false
@@ -25,7 +26,7 @@ class Game extends Component {
 
       {
         pseudo: 'Leon',
-        avatar: './images/Leon.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 100,
         isDrawing: true,
         win: false
@@ -33,7 +34,7 @@ class Game extends Component {
 
       {
         pseudo: 'Emilie',
-        avatar: './images/Emilie.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 1001,
         isDrawing: false,
         win: false
@@ -41,7 +42,7 @@ class Game extends Component {
 
       {
         pseudo: 'Jane',
-        avatar: './images/Jane.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 225,
         isDrawing: true,
         win: false
@@ -49,7 +50,7 @@ class Game extends Component {
       
       {
         pseudo: 'Jack',
-        avatar: './images/Jack.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 10,
         isDrawing: false,
         win: false
@@ -57,7 +58,7 @@ class Game extends Component {
 
       {
         pseudo: 'Mathias',
-        avatar: './images/Mathias.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 356,
         isDrawing: false,
         win: false
@@ -65,7 +66,7 @@ class Game extends Component {
 
       {
         pseudo: 'Cindy',
-        avatar: './images/Cindy.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 69,
         isDrawing: false,
         win: false
@@ -73,7 +74,7 @@ class Game extends Component {
       
       {
         pseudo: 'John',
-        avatar: './images/John.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 785,
         isDrawing: false,
         win: false
@@ -81,7 +82,7 @@ class Game extends Component {
 
       {
         pseudo: 'Jean-Luc',
-        avatar: './images/Jean-Luc.jpg',
+        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 236,
         isDrawing: false,
         win: false
@@ -98,6 +99,7 @@ class Game extends Component {
     }
     this.socket = socketIOClient('http://192.168.0.105:8080') //'http://192.168.0.105:8080'
     this.socket.on("add user", data =>{
+      
       let user = data.newUser;
       let existingUsers = data.existingUsers;
       this.addUser(user, existingUsers)
@@ -132,7 +134,10 @@ class Game extends Component {
       this.socket.emit("new user", this.props.user)
   }
 
+
+
   handleChoiceClick = (name) => {
+    this.socket.emit("gameIsChosen", name)
     this.setState({
       gameChosen: name
     })
@@ -155,9 +160,9 @@ class Game extends Component {
   }
 
   handleWin = () =>{
-    let playersUpdated = this.state.players.slice(0);
+    let playersUpdated = this.state.players;
 
-    playersUpdated[0].win = true;
+    playersUpdated.win = true;
 
     this.setState({
       player: playersUpdated
@@ -172,19 +177,34 @@ class Game extends Component {
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
-                  /*win = {this.state.players[0].win} 
-                  isDrawing = {this.state.players[1].isDrawing}*/ 
-                  socket={this.socket}/>
-                   
-                <div className="player-choice-zone">
-                  {this.state.isReady ?
-                    (!this.state.gameChosen ?
-                      <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} /> :
-                      <PlayerChoiceList gameChosen={this.state.gameChosen}/>) :
-                  <div style= {{color: "#000000"}}>Loading...</div> }
-                </div>
-                <ChatBoard user={this.props.user} gameChosen={this.state.gameChosen} isWin={this.handleWin} />
+                  currentPlayer={this.state.currentPlayer}/>
+                
+                <ChatBoard 
+                  gameChosen={this.state.gameChosen} 
+                  isWin={this.handleWin} 
+                  currentPlayer={this.state.currentPlayer}/>
             </div>
+
+            {!this.state.gameChosen && this.state.currentPlayer.isDrawer
+            ?<div className="player-choice-zone">   
+              {this.state.isReady 
+              ? <PlayerChoiceList onClick={this.handleChoiceClick} choices={this.state.choices} />
+              : <div style= {{color: "#000000"}}>Loading...</div> }
+            </div>
+            : null}
+
+
+            {/* Bouton Test Score */}
+            {/* <div className="zone-test" >
+              {this.state.players.map((player, x) => 
+                <div className="player-test">
+                  <div>{player.pseudo} score: {player.score}</div>
+                  <button onClick={() => {this.updatingScore(x, 100)}} >+100</button>
+                  <button onClick={() => {this.updatingScore(x, -100)}} >-100</button>
+                </div>
+              )}
+            </div> */}
+
           <PlayerScore players={this.state.players} />
       </div>
   );

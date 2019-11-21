@@ -1,5 +1,6 @@
 import React from 'react';
 import DrawingBoard from './DrawingBoard';
+import MessageInDrowingBoard from './MessageInDrowingBoard';
 import Palette from './Palette';
 import GuessZone from '../Guesser/GuessZone';
 import socketIOClient from 'socket.io-client'
@@ -39,9 +40,9 @@ class GameBoard extends React.Component {
 
        return grid
     }
-   
+
     drawBoard = (lat, lng) => {
-       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing) {
+       if (this.state.board[lat][lng] === this.state.chosenColor || !this.state.isDrawing || !this.props.currentPlayer.isDrawer){
             return
           }
           let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -66,7 +67,7 @@ class GameBoard extends React.Component {
 
     sendPosition = (lat, lng) => {
 
-      if (this.state.board[lat][lng] === this.state.chosenColor) {
+      if (this.state.board[lat][lng] === this.state.chosenColor || !this.props.currentPlayer.isDrawer){
         return 
       }
       let updatedBoard = this.updateGrid(this.state.board, lat, lng)
@@ -93,25 +94,30 @@ class GameBoard extends React.Component {
 
    render(){
       const { board } = this.state
+
       return(
-          <div className='board-canvas' 
+          <div className='game-zone-left' 
                onMouseDown={this.handleMouseDown} 
                onMouseUp={this.handleMouseUp}
-               style={{
-                 height: "480px",
-                 width: "480px"
-               }}>
-          <DrawingBoard
-              board={board}
-              drawBoard={this.drawBoard}
-              isDrawing={this.state.isDrawing}
-              chosenColor={this.state.chosenColor}
-              sendPosition={this.sendPosition}
-          />
-          
-          {this.props.isDrawing  
-            ? <Palette resetGrid={this.resetGrid} chooseColor={this.handleColorSelection}/>
-            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} /*win={this.props.win}*/ />
+              >
+                
+          { !this.props.wordToGuess && !this.props.currentPlayer.isDrawer
+      
+            ? <MessageInDrowingBoard />
+            : <DrawingBoard
+            board={board}
+            drawBoard={this.drawBoard}
+            isDrawing={this.state.isDrawing}
+            chosenColor={this.state.chosenColor}
+            sendPosition={this.sendPosition} />
+          }
+
+          {this.props.currentPlayer.isDrawer  
+            ? <Palette 
+            resetGrid={this.resetGrid} 
+            chooseColor={this.handleColorSelection}
+            wordToGuess={this.props.wordToGuess}/>
+            : this.props.wordToGuess && <GuessZone wordToGuess={this.props.wordToGuess} win={this.props.currentPlayer.win} />
           }
           </div>
         );

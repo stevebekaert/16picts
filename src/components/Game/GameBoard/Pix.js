@@ -5,7 +5,8 @@ const Pix = ({drawBoard, color,lat, lng, sendPosition}) =>
         onMouseOver={ () => drawBoard(lat, lng)}
         onClick={() =>  sendPosition(lat, lng)}
         style ={{
-            backgroundColor : !color ? 'inherit' : color
+            backgroundColor : !color ? 'inherit' : color,
+            border: !color ? '1px solid rgba(212, 199, 199, 0.5)' : `1px solid ${color}`
         }}
         
     ></div>

@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Avatar from './components/Avatar/Avatar.js';
 import Header from './components/Header.js';
 import Game from './components/Game/Game.js';
+import './App.css'
 
 class App extends Component{
 
@@ -12,9 +13,8 @@ class App extends Component{
       pseudo : '',
       avatar : '',
       id : '',
-      isdrawer: false,
-    } 
-    
+      isDrawer: false,
+  } 
   }
 
   handleClick = (image) => {
@@ -32,13 +32,13 @@ class App extends Component{
   }
 
   handleClickToCreateGame = () => {
-    this.setState({isdrawer : true});
+    this.setState({isDrawer : true});
 }
 
   render(){
 
     return(
-      <div className="App visible">
+      <div className="App-seize-picts">
           <Switch>
             <Route
               exact
@@ -56,7 +56,7 @@ class App extends Component{
               selectNameAvatar={(event) => this.myChangeName(event)}
               selectIdAvatar={(event) => this.sendUserToGamePage(event)}
 
-              isdrawer={this.state.isdrawer} />}>
+              isDrawer={this.state.isDrawer} />}>
             </Route>
 
             

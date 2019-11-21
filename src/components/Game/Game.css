@@ -1,7 +1,6 @@
 .drawingBoard-chatBoard{
     display: flex;
     flex-wrap: wrap;
-
     width: 80%;
 }
 
@@ -15,3 +14,345 @@
     height: 90px;
     width: 100px;
 }
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 90%;
+    min-width: 1020px;
+    max-width: 1150px;
+    padding: 1.5%;
+    margin-top: 20px;
+
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+}
+
+.game-zone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width:100%;
+
+    color: white;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}    
+
+
+/*CHAT*/
+.chat-zone{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    min-width: 480px;
+    margin-left: 2%;
+}
+
+.answer-zone {
+    display:flex;
+    flex-direction:column;
+
+    height: 88%;
+    margin-bottom: 3%;
+
+    padding: 0 18px 10px;
+    overflow-y: auto;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    border-radius:4px;
+
+    text-align:left;
+    color: #000;
+}
+  
+.answer-zone > :first-child {
+    margin-top: auto !important
+}
+  
+.chat-form {
+    width: 100%;
+    height: 7%;
+}
+  
+.chat-form input{
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+}
+  
+.msg-content {
+    color:white;
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+
+    box-sizing: border-box;
+    
+    color: white;
+    font-size: 1.3em;
+}
+
+
+/*GAME BOARD*/
+.board-canvas {
+    width: 480px;
+    height: 480px;
+
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    background-color: rgba(56, 66, 94, 0.5);
+}
+  
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+  
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+  
+.cell {
+    height: 9.95px;
+    border: 1px solid rgba(212, 199, 199, 0.5);
+}
+
+
+/*PLAYER SCORE*/
+.PlayerScore{ 
+    display: flex;
+
+    position: relative;
+
+    width: 100%;
+    height: 132px;
+    margin-top: 20px;
+
+    background-color: rgba(56, 66, 94, 0.5); 
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.Player{
+    position: absolute;
+
+    width: 120px; 
+    height: 120px;
+    margin: 6px; 
+
+    background-color: rgba(56, 66, 94, 1);
+    border-radius: 4px;
+    
+    color: rgba(255, 255, 255, 0.596);
+
+    transition: 1s ease-in-out;
+}
+
+.Player img{
+    width: 50%;
+}
+
+
+/*TIMER*/
+.stop-off{
+    color: red;
+    background-color: orange;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.stop-on{
+    color: black;
+    background-color: white;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.timer-zone {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    width:100%;
+    margin-bottom: 1.5%; 
+}
+
+.timer-bar-zone{
+    display: flex;
+
+    width: 100%;
+    height: 2vh; 
+    padding: 2px;
+    
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+    overflow: hidden;
+
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    background-color: rgba(56, 66, 94, 0.5);
+}
+
+.timer-completion{
+    height: 100%;
+    background-color: rgb(91, 204, 139);
+    width: 100%;
+    transition: width 1s linear;
+}
+
+.timer-text {
+    color: #000
+}
+
+
+/*GAME BOARD*/
+.chatBoard{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    width: 30%;
+    height: 480px;
+}
+
+.answerBoard{
+    width: 100%;
+    height: 80%;
+    padding: 0 10px;
+    overflow: scroll;
+}
+
+.messageInput{
+    width:100%;
+    height: 20%;
+}
+
+
+/*PLAYER CHOICE ITEM*/
+.player-choice-zone {  
+    background-color: rgba(128, 128, 128, 0.452);
+    border-radius: 1%;
+    border: 2px solid rgba(112, 109, 109, 0.678);
+    box-shadow: 0px 0px 5px grey;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90vw;
+    max-width: 1160px;
+    height: 74vh;
+    margin-top: -1vh;
+    position: absolute;
+}
+
+.playerchoice-zone{
+    color: black;
+    font-size: "10px";
+    width: 200px;
+    max-width: 200px;
+}
+
+.playerchoice-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+
+/*GUESS ZONE*/
+.guess-zone{
+    color: black;
+    display: flex;
+}
+
+.guess-letter{
+    width: 20px;
+    margin: 1px;
+    background-color: lightgrey;
+}
+
+
+/*DRAWER OPTION*/
+.drawer-option{
+    margin-top: 4%;
+}
+
+.color-container{
+    display:flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+    align-items:center;
+
+    height: 40px;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+  }
+  
+  .color-container:last-child {
+    border: 1px solid #c3c3c3
+  }
+  
+  .color-option {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+  
+  .option-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25%;
+    height: 40px;
+    margin-top: 10px;
+
+    background-color: rgba(56, 66, 94, 0.5);
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50,50,50,0.11);
+
+    color: #65b2df;
+    font-size: 1.2em;
+    font-weight: 500;
+    
+    transition: all 0.3s ease-in;
+  }
+  
+  .option-container:hover {
+    background-color: #65b2df;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+  }
+  
+  .error {
+    font-size: 10px;
+    background-color:red;
+    color: #fff;
+  }

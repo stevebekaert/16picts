@@ -1,5 +1,5 @@
 import React from 'react';
-import './GuessZone.css';
+import './Game.css';
 import Letter from './Guesser/Letter';
 
 class GuessZone extends React.Component {

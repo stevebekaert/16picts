@@ -5,7 +5,7 @@ import AnswerBoard from './AnswerBoard';
 
 import socketIOClient from 'socket.io-client'
 
-import './chatBoard.css'
+import '../Game.css'
 
 
 
@@ -40,7 +40,7 @@ class ChatBoard extends Component {
 
         this.socket.emit('SEND_MESSAGE', {
             content: this.checkMessage(this.state.currentInput),
-            from: this.props.user.pseudo
+            from: this.props.currentPlayer.pseudo 
         })
 
         this.setState({currentInput: ''})
@@ -49,7 +49,7 @@ class ChatBoard extends Component {
     checkMessage = (msg) => {
         let gameChosenName = this.props.gameChosen.name;
         if (gameChosenName && gameChosenName.toUpperCase() === msg.toUpperCase()) {
-            let winMessage = this.props.user.pseudo + " found the word, congrats!"
+            let winMessage = this.props.currentPlayer.pseudo + " found the word, congrats!"
             this.props.isWin();
             return winMessage
         }
@@ -59,7 +59,7 @@ class ChatBoard extends Component {
 /* working without socket
     handleSubmit = (event, messageToAdd) => {
         this.setState({ isWriting: false })
-        if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput) {
+        if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput && this.props.currentPlayer.isDrawer) {
             this.setState({
                 messages: this.getNewMessages(true),
                 currentInput: ''
@@ -67,7 +67,7 @@ class ChatBoard extends Component {
             this.props.isWin();
             event.preventDefault();
             }
-        else { if (this.state.currentInput !== '') {
+        else { if (this.state.currentInput !== '' || this.props.currentPlayer.isDrawer) {
              let newMessages = this.getNewMessages();
              this.setState({
                  messages: newMessages
@@ -85,16 +85,34 @@ class ChatBoard extends Component {
         let newDate = new Date().toLocaleString();
         let from = this.whoTalk()
         let existingMessages  = this.state.messages;
-        let newMessage;
-        found ? newMessage = { content: from + " found the Word", from:"me"} :
+        
+        
+        /*found ? newMessage = { content: from + " found the Word", from:"me"} :
         newMessage = { content: from === "myself" ? this.state.currentInput: this.state.currentInput.substring(0, this.state.currentInput.length - 5), 
                             sender: from, 
                             date: "On " + newDate }
+        let newMessage = this.createNewMessage(found, this.props.currentPlayer.isDrawer, from, newDate)
         existingMessages.push(newMessage)
 
         return existingMessages;
     } 
 /*
+
+    createNewMessage = (found, isDrawer, from, date) =>{
+        let messageCreated = {};
+        if (found && isDrawer){
+            messageCreated.content = "Drawer can't post the answer.";   
+        } 
+        else if(found && !isDrawer){
+            messageCreated.content = from + 'Found de word';
+        }
+        else {
+            messageCreated.content = this.state.currentInput;
+        }
+        messageCreated.sender = from;
+        messageCreated.date = date 
+        return messageCreated;
+    }
 
     /*FIND CHARACTER DEMO ONLY */
 
@@ -112,11 +130,11 @@ class ChatBoard extends Component {
     render () {
     
         return (
-        <div>
-            <div className="chat-zone">   
+        <div className="chat-zone">
+            <div className="answer-zone">   
                 <AnswerBoard
                     messages={this.state.messages}
-                    user={this.props.user}>
+                    user={this.props.currentPlayer.pseudo }>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
             
