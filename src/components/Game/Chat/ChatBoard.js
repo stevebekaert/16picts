@@ -19,7 +19,7 @@ class ChatBoard extends Component {
             newMessage: '',
             gameChosen: ''
         }
-        this.socket = socketIOClient('http://192.168.0.105:8080')
+        this.socket = socketIOClient('http://192.168.0.251:8080')
         this.socket.on('RECEIVE_MESSAGE', data => {
             this.addMessage(data)
         });

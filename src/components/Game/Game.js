@@ -95,9 +95,11 @@ class Game extends Component {
       players:[],
       gameChosen: "",
       connectedPlayer: [],
-      currentPlayer: ''
+      currentPlayer: '',
+      gameStart: true
     }
-    this.socket = socketIOClient('http://192.168.0.105:8080') //'http://192.168.0.105:8080'
+
+    this.socket = socketIOClient('http://192.168.0.251:8080') //'http://192.168.0.105:8080'
     this.socket.on("add user", data =>{
       let user = data.newUser;
       let existingUsers = data.existingUsers;
@@ -148,7 +150,8 @@ class Game extends Component {
   handleChoiceClick = (name) => {
     this.socket.emit("gameIsChosen", name)
     this.setState({
-      gameChosen: name
+      gameChosen: name,
+      gameStart: true
     })
   }
       
@@ -182,7 +185,8 @@ class Game extends Component {
   render() {
     return( 
         <div className="game">
-            <Timer />
+            <Timer 
+            gameStart={this.state.gameStart}/>
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 

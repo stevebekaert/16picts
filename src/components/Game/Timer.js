@@ -9,12 +9,12 @@ class Timer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            time: 10,
+            time: 120,
             on: false,
             completion: 100
         }
 
-        this.initialTime = 10;
+        this.initialTime = 120;
     }
 
     startTimer = () => {
@@ -60,6 +60,9 @@ class Timer extends Component {
                 <div className= {this.state.on ? 'stop-on' : 'stop-off'} >
                     {this.state.on ? 'EN COURS' : 'STOP'}
                 </div> */}
+                {this.props.gameStart
+                ? this.startTimer
+                : null}
 
                 <div className= 'timer-bar-zone'>
                     <div className='timer-completion' style={{
