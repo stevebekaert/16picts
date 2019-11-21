@@ -24,7 +24,7 @@ class Palette extends React.Component {
                     onClick={() => this.props.resetGrid()}>
                     <div>RESET</div>
                 </div>
-                    <p>{this.props.wordToGuess}</p>
+                    <div className="option-game-chosed" >{this.props.wordToGuess}</div>
             </div>
         )
     }
