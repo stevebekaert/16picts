@@ -6,6 +6,8 @@ import ChatBoard from './Chat/ChatBoard.js'
 import PlayerChoiceList from './Drawer/PlayerChoiceList'
 import Timer from './Timer.js';
 import PlayerScore from './PlayerScore';
+import socketIOClient from 'socket.io-client'
+
 /*import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'*/
 
 
@@ -67,7 +69,7 @@ class Game extends Component {
         pseudo: 'Cindy',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 69,
-        isDrawing: true,
+        isDrawing: false,
         win: false
       },
       
@@ -91,27 +93,66 @@ class Game extends Component {
     this.state = { 
       choices: [],
       isReady : false,
-      players: this.players,
+      players:[],
       gameChosen: "",
-      currentPlayer: this.props.user,
+      connectedPlayer: [],
+      currentPlayer: '',
+      gameStart: true
     }
+
+    this.socket = socketIOClient('http://192.168.0.251:8080') //'http://192.168.0.105:8080'
+    this.socket.on("add user", data =>{
+      let user = data.newUser;
+      let existingUsers = data.existingUsers;
+      this.addUser(user, existingUsers)
+    })
+    this.socket.on("warn new user", data => {
+      let existingUsers = data.existingUsers;
+      this.updateUsersList(existingUsers)
+    })
+    this.socket.on("chosenGame", data => {
+      let chosenGame = data;
+      this.updateChosenGame(chosenGame)
+    })
 
   }
 
+  updateChosenGame = (game) => {
+    this.setState({
+      gameChosen: game
+    })
+  }
+
+  addUser = (user, existingUsers) => {
+    this.setState({
+      currentPlayer: user,
+      players: [...existingUsers]
+    })
+  }
+
+  updateUsersList = (existingList) => {
+    this.setState({
+      players: [...existingList]
+    })
+  }
 
   componentDidMount = () => {
-    fetch('http://localhost:8080/api/getAxios')
+    fetch('http://127.0.0.1:8080/api/getAxios')
       .then(response => response.json())
       .then(response => this.setState({choices: response, isReady: true}))
       //.then(data => this.setState({choices: data}))
             /*.catch(error => console.log(this.setState({choices: this.state.choices.push(error)})))*/
+      this.socket.emit("existing users")
+      this.socket.emit("new user", this.props.user)
   }
 
 
 
   handleChoiceClick = (name) => {
+    this.socket.emit("gameIsChosen", name)
     this.setState({
-      gameChosen: name
+      gameChosen: name,
+      gameStart: true
     })
   }
       
@@ -145,7 +186,8 @@ class Game extends Component {
   render() {
     return( 
         <div className="game">
-            <Timer />
+            <Timer 
+            gameStart={this.state.gameStart}/>
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
@@ -177,7 +219,7 @@ class Game extends Component {
               )}
             </div> */}
 
-          <PlayerScore players={this.players} />
+          <PlayerScore players={this.state.players} />
       </div>
   );
   }
