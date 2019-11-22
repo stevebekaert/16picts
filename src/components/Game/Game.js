@@ -21,72 +21,56 @@ class Game extends Component {
         pseudo: 'Luc',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 550,
-        isDrawing: false,
-        win: false
+        isDrawed: false,
+        hasAlreadyDrawn: false
       },
 
       {
         pseudo: 'Leon',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 100,
-        isDrawing: true,
-        win: false
+        isDrawed: true,
+        hasAlreadyDrawn: false
       },
 
       {
         pseudo: 'Emilie',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 1001,
-        isDrawing: false,
-        win: false
+        isDrawed: false,
+        hasAlreadyDrawn: false
       },
 
       {
         pseudo: 'Jane',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 225,
-        isDrawing: true,
-        win: false
+        isDrawed: true,
+        hasAlreadyDrawn: false
       },
       
       {
         pseudo: 'Jack',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 10,
-        isDrawing: false,
-        win: false
+        isDrawed: false,
+        hasAlreadyDrawn: false
       },
 
       {
         pseudo: 'Mathias',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 356,
-        isDrawing: false,
-        win: false
+        isDrawed: false,
+        hasAlreadyDrawn: false
       },
 
       {
         pseudo: 'Cindy',
         avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
         score: 69,
-        isDrawing: false,
-        win: false
-      },
-      
-      {
-        pseudo: 'John',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 785,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Jean-Luc',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 236,
-        isDrawing: false,
-        win: false
+        isDrawed: false,
+        hasAlreadyDrawn: false
       }
     ];
 
@@ -96,11 +80,12 @@ class Game extends Component {
       players:[],
       gameChosen: "",
       connectedPlayer: [],
-      currentPlayer: '',
-      gameStart: true
+      currentPlayer: {},
+      gameStart: false,
+      gameStop: true
     }
 
-    this.socket = socketIOClient('http://192.168.0.251:8080') //'http://192.168.0.105:8080'
+    this.socket = socketIOClient('http://192.168.0.188:8080') //'http://192.168.0.105:8080'
     this.socket.on("add user", data =>{
       let user = data.newUser;
       let existingUsers = data.existingUsers;
@@ -152,7 +137,8 @@ class Game extends Component {
     this.socket.emit("gameIsChosen", name)
     this.setState({
       gameChosen: name,
-      gameStart: true
+      gameStart: true,
+      gameStop: false
     })
   }
       
@@ -173,21 +159,70 @@ class Game extends Component {
   }
 
   handleWin = () =>{
-    let playersUpdated = this.state.players;
+    /*FUNCTION TO FIND NEW DRAWER
+    let playerNextDrawer = this.state.players.slice(0);
+    let drawerFinded = false;
 
-    playersUpdated.win = true;
+    playerNextDrawer.map(player => {
+      if(player.isDrawer){
+        player.isDrawer = false;
+        player.hasAlreadyDrawn = true;
+      }
+    });
+
+    for(let i=0; i<playerNextDrawer.length; i++){
+      if(!playerNextDrawer[i].hasAlreadyDrawn){
+        playerNextDrawer[i].isDrawer = true;
+        drawerFinded = true;
+        break;
+      }
+    }
+
+    if(!drawerFinded){
+      playerNextDrawer.map((player, i) => {
+        if(i==0){
+          player.isDrawer = true;
+          player.hasAlreadyDrawn = false;
+        }
+        player.hasAlreadyDrawn = false;
+      });
+    }
+    */
 
     this.setState({
-      player: playersUpdated
-    })
+      gameStart: false,
+      gameStop: true
+    });
+
+    /*
+    let playerUpdated = this.state.currentPlayer;
+
+
+    playerUpdated.win = true;
+
+    this.setState({
+      currentPlayer: playerUpdated
+    })*/
   }
 
+  gameStart = () =>{
+    this.setState({
+      gameStart: true
+    });
+  }
 
   render() {
     return( 
         <div className="game">
+          {/* <button onClick={this.handleWin} >WIN</button>
+          <button onClick={this.gameStart} >Game Start</button> */}
+            
             <Timer 
-            gameStart={this.state.gameStart}/>
+              gameStart={this.state.gameStart}
+              gameStop={this.state.gameStop}
+              isWin={this.handleWin}
+            />
+
             <div className="game-zone">
                 <GameBoard 
                   wordToGuess = {this.state.gameChosen.name} 
@@ -218,7 +253,7 @@ class Game extends Component {
                 </div>
               )}
             </div> */}
-
+          
           <PlayerScore players={this.state.players} />
       </div>
   );

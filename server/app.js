@@ -46,6 +46,7 @@ io.on("connection", socket => {
     socket.on("new user", (data) => {
       data.id = socket.id;
       data.score = 0;
+      data.hasAlreadyDrawn = false;
       existingPlayers.push(data)
       //data is my CurrentUser, existingPlayers is an array updated.
       socket.emit("add user", {newUser: data, existingUsers: existingPlayers})
