@@ -32,6 +32,7 @@ const images = ['http://emiconf.ens-lyon.fr/images/avatar.png/image',
 
 const findDisconnectedPlayer = (id) => {
   let key = existingPlayers.indexOf(id)
+  console.log("key", key)
   return key;
 }
 
@@ -68,10 +69,12 @@ io.on("connection", socket => {
       socket.broadcast.emit("chosenGame", data)
     })
 
-  /* socket.on('disconnect', () => {
+   /*socket.on('disconnect', () => {
       let keyInList= findDisconnectedPlayer(socket.id);
       existingPlayers.splice(keyInList, 1)
+      if (keyInList !== -1) {
       socket.broadcast.emit("user disconnected", {existingUsers: existingPlayers});
+      }
     }) */
 })
 

@@ -37,9 +37,9 @@ class Game extends Component {
       let chosenGame = data;
       this.updateChosenGame(chosenGame)
       })
-    this.socket.on("user disconnected", data => {
+    /*this.socket.on("user disconnected", data => {
       this.updateUsersList(data)
-    })
+    })*/
     
   }
 

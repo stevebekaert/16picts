@@ -38,6 +38,7 @@ class Message extends React.Component {
                     style={{
                         fontSize: "11px",
                         right: "0",
+                        color: "white",
                         alignSelf: this.props.sender === this.props.currentPlayer.pseudo ? "start" : "end"
                     }}>
                         {this.props.sender}
