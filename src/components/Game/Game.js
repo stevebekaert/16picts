@@ -90,21 +90,38 @@ class Game extends Component {
       let user = data.newUser;
       let existingUsers = data.existingUsers;
       this.addUser(user, existingUsers)
-    })
+      })
+      
     this.socket.on("warn new user", data => {
       let existingUsers = data.existingUsers;
       this.updateUsersList(existingUsers)
-    })
+      })
     this.socket.on("chosenGame", data => {
       let chosenGame = data;
       this.updateChosenGame(chosenGame)
-    })
+      })
+    this.socket.on('game stop', data => {
+      let gameStatus = data;
+      this.stopGame();
+    } )
+    /*this.socket.on("user disconnected", data => {
+      this.updateUsersList(data)
+    })*/
+    
+  }
 
+  stopGame = () => {
+    this.setState({
+      gameStart: false,
+      gameStop: true
+    })
   }
 
   updateChosenGame = (game) => {
     this.setState({
-      gameChosen: game
+      gameChosen: game,
+      gameStart: true,
+      gameStop: false
     })
   }
 
@@ -135,6 +152,7 @@ class Game extends Component {
 
   handleChoiceClick = (name) => {
     this.socket.emit("gameIsChosen", name)
+    this.socket.emit("", name)
     this.setState({
       gameChosen: name,
       gameStart: true,
@@ -189,10 +207,15 @@ class Game extends Component {
     }
     */
 
+    this.socket.emit("stop", {gameStart: false, gameStop: true})
+
+    
     this.setState({
       gameStart: false,
       gameStop: true
     });
+    
+    
 
     /*
     let playerUpdated = this.state.currentPlayer;

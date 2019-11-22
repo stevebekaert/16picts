@@ -38,7 +38,8 @@ class ChoseImages extends Component{
                         <div className="imageDisignBloc">
                             <img onClick={() => this.props.fctChoseImage(image)} 
                                 className='imageDisign'
-                                src={image} /></div> )
+                                src={image}
+                                alt="Disign, really?" /></div> )
                     }
                 </div>
             </div>

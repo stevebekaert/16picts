@@ -71,6 +71,7 @@ class GameBoard extends React.Component {
         return 
       }
       let updatedBoard = this.updateGrid(this.state.board, lat, lng)
+      this.socket.emit("drawing", updatedBoard)
       this.setState({
         actualPosition: [lat, lng],
         board : updatedBoard

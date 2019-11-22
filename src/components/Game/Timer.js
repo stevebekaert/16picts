@@ -8,7 +8,7 @@ class Timer extends Component {
     constructor(props){
         super(props);
 
-        this.initialTime = 10;
+        this.initialTime = 45;
 
         this.state = {
             time: this.initialTime,

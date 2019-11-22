@@ -44,12 +44,12 @@ class ChatBoard extends Component {
         return msg
     }
 
-    handleSubmit = (event, messageToAdd) => {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         let newDate = new Date().toLocaleString();
-        let from = this.props.currentPlayer.pseudo
-
+        /*let from = this.whoTalk()*/
+        let from = this.props.currentPlayer.pseudo;
         this.setState({ isWriting: false })
 
         if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput) {
@@ -57,10 +57,13 @@ class ChatBoard extends Component {
 
             this.socket.emit('SEND_MESSAGE', {
                 content: newMessages.content,
-                from: from 
+                from: this.props.currentPlayer.pseudo
             })
 
-            this.props.isWin();
+            if(!this.props.currentPlayer.isDrawer){
+                this.props.isWin();
+            }
+            
         }
 
         else if (this.state.currentInput !== '') {
@@ -82,7 +85,7 @@ class ChatBoard extends Component {
             messageCreated.content = "Drawer can't post the answer.";   
         } 
         else if(found && !isDrawer){
-            messageCreated.content = from + 'guessed the word !';
+            messageCreated.content = from + ' guessed the word !';
         }
         else {
             messageCreated.content = this.state.currentInput;
@@ -115,7 +118,7 @@ class ChatBoard extends Component {
             <div className="answer-zone">   
                 <AnswerBoard
                     messages={this.state.messages}
-                    user={this.props.currentPlayer }>
+                    currentPlayer={this.props.currentPlayer }>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
             
