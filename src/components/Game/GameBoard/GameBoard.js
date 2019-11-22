@@ -17,7 +17,7 @@ class GameBoard extends React.Component {
        }
 
        this.isDrawing = false;
-       this.socket = socketIOClient('http://192.168.0.105:8080')
+       this.socket = socketIOClient('http://192.168.0.105:8080') /*http://192.168.0.105:8080'*/
        this.socket.on("gridUpdating", data => {
          this.updateGridFromDrawer(data)
        })
@@ -71,6 +71,7 @@ class GameBoard extends React.Component {
         return 
       }
       let updatedBoard = this.updateGrid(this.state.board, lat, lng)
+      this.socket.emit("drawing", updatedBoard)
       this.setState({
         actualPosition: [lat, lng],
         board : updatedBoard

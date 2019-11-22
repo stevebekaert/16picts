@@ -14,33 +14,9 @@ class Avatar extends Component {
     id : '',
     isDrawer: false,
     }   
-
-    
-
-}
+  }
   
-
-
-
-// handleClick = (image) => {
-//   this.setState({avatar : image});
-//   // console.log(key);
-//  }
-
-//  myChangeName = (event) => {
-//   this.setState({pseudo: event.target.value});
-//   event.preventDefault();
-// }
-
-// sendUserToGamePage = (event) => {
-//   this.setState({id : event.timeStamp});
-// }
-
-
-
-
   render(){
-
       return(
         <div className="AppAvatar">
           <div className="navBarAvatar">
@@ -48,7 +24,7 @@ class Avatar extends Component {
             </div>
           <div className="avatarPage">
             {this.props.avatar ?
-            <img className='avatarDesign' src={this.props.avatar} /> :
+            <img className='avatarDesign' src={this.props.avatar} alt="Ici devrait s'afficher un avatar"/> :
             <div className="no-image"></div>}
             <h1>Hello {this.props.pseudo}</h1>
             <ChoseImages fctChoseImage = {this.props.selectImageAvatar}/>

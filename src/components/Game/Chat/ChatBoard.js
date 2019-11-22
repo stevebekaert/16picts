@@ -19,7 +19,7 @@ class ChatBoard extends Component {
             newMessage: '',
             gameChosen: ''
         }
-        this.socket = socketIOClient('http://192.168.0.105:8080')
+        this.socket = socketIOClient('http://192.168.0.105:8080') //http://192.168.0.105:8080
         this.socket.on('RECEIVE_MESSAGE', data => {
             this.addMessage(data)
         });
@@ -56,16 +56,17 @@ class ChatBoard extends Component {
         return msg
     }
 
-    handleSubmit = (event, messageToAdd) => {
+    handleSubmit = (event) => {
         event.preventDefault();
         let newDate = new Date().toLocaleString();
-        let from = this.whoTalk()
+        /*let from = this.whoTalk()*/
+        let from = this.props.currentPlayer.pseudo;
         this.setState({ isWriting: false })
         if (this.state.currentInput === this.props.gameChosen.name && this.state.currentInput) {
             let newMessages = this.createNewMessage(true, this.props.currentPlayer.isDrawer, from, newDate) ;
             this.socket.emit('SEND_MESSAGE', {
                 content: newMessages.content,
-                from: this.props.currentPlayer.pseudo 
+                from: this.props.currentPlayer.pseudo
             })
             this.props.isWin();
 
@@ -98,7 +99,7 @@ class ChatBoard extends Component {
             messageCreated.content = "Drawer can't post the answer.";   
         } 
         else if(found && !isDrawer){
-            messageCreated.content = from + 'guessed the word !';
+            messageCreated.content = from + ' guessed the word !';
         }
         else {
             messageCreated.content = this.state.currentInput;
@@ -128,7 +129,7 @@ class ChatBoard extends Component {
             <div className="answer-zone">   
                 <AnswerBoard
                     messages={this.state.messages}
-                    user={this.props.currentPlayer }>
+                    currentPlayer={this.props.currentPlayer }>
                 </AnswerBoard>
                 { this.state.isWriting ? "..." : ""} 
             

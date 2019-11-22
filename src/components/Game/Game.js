@@ -14,81 +14,6 @@ class Game extends Component {
 
   constructor(props) {
     super(props)
-
-    this.players = [
-      {
-        pseudo: 'Luc',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 550,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Leon',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 100,
-        isDrawing: true,
-        win: false
-      },
-
-      {
-        pseudo: 'Emilie',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 1001,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Jane',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 225,
-        isDrawing: true,
-        win: false
-      },
-      
-      {
-        pseudo: 'Jack',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 10,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Mathias',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 356,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Cindy',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 69,
-        isDrawing: false,
-        win: false
-      },
-      
-      {
-        pseudo: 'John',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 785,
-        isDrawing: false,
-        win: false
-      },
-
-      {
-        pseudo: 'Jean-Luc',
-        avatar: 'https://assets0.uniksapp.com/placeholders/users/profile/avatar/male/640/male_1473167824.png',
-        score: 236,
-        isDrawing: false,
-        win: false
-      }
-    ];
-
     this.state = { 
       choices: [],
       isReady : false,
@@ -102,16 +27,20 @@ class Game extends Component {
       let user = data.newUser;
       let existingUsers = data.existingUsers;
       this.addUser(user, existingUsers)
-    })
+      })
+      
     this.socket.on("warn new user", data => {
       let existingUsers = data.existingUsers;
       this.updateUsersList(existingUsers)
-    })
+      })
     this.socket.on("chosenGame", data => {
       let chosenGame = data;
       this.updateChosenGame(chosenGame)
+      })
+    this.socket.on("user disconnected", data => {
+      this.updateUsersList(data)
     })
-
+    
   }
 
   updateChosenGame = (game) => {
