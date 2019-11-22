@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ![alt text](https://ibb.co/7CfHNqt)
+![Image description](https://ibb.co/7CfHNqt)
 
 # 16-picts
 
