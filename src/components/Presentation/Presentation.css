@@ -1,0 +1,74 @@
+.navBarPresentation{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    height: 20vh;
+}
+
+/* .navLinkFeuille2{
+
+}  */
+
+
+.navPresentationPageLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    margin: 9%;
+    width: 17vw;
+    height: 7vh;   
+    background-color: rgba(128, 128, 128, 0.8);
+    text-shadow: 0px 0px 10px black;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+}
+
+.navPresentationPageLink:hover{
+    color: rgba(202, 194, 194, 0.877);
+    background: linear-gradient(to top, rgba(64, 73, 116, 0.75), 20%, rgba(117, 113, 113, 0.9));
+    border-radius: 3px;
+    box-shadow: 0px 0px 7px grey;
+}
+
+.logoTitlePres{ 
+        margin-left: 10%;
+        position: relative;
+        font-size: 10em;
+}
+
+.logoTitlePres p{
+    font-size: 10vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0px 0px 20px black;
+}
+
+.titlePres{
+    color: rgba(153, 147, 147, 0.747);
+    font-size: 10vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0px 0px 20px black;
+    /* margin-bottom: 15vh; */
+}
+
+.citation{
+    color: rgb(153, 147, 147);
+    font-style: italic;
+    text-shadow: 0px 0px 10px black;
+}
+
+.bloctext{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    height: 30vh;
+
+    color: rgb(153, 147, 147);
+    text-shadow: 0px 0px 10px black;
+}
+
+.bloctext li{
+    margin-bottom: 5%;
+}

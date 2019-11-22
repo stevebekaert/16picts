@@ -4,6 +4,8 @@ import Avatar from './components/Avatar/Avatar.js';
 import Header from './components/Header.js';
 import Game from './components/Game/Game.js';
 import './App.css'
+import Feuille1 from './components/Presentation/Feuille1.js';
+import Feuille2 from './components/Presentation/Feuille2.js';
 
 class App extends Component{
 
@@ -60,18 +62,17 @@ class App extends Component{
             </Route>
 
             
-            <Route 
-              path="/GameGuesser" 
-              render={(props) => 
-                <Game user={this.state} />}>
-            </Route>
+            <Route path='/Feuille1' 
+            component={Feuille1}></Route>
+
+            <Route path='/Feuille2' 
+            component={Feuille2}></Route>
 
             <Route 
               path="/GameDrawer" 
               render={(props) => 
                 <Game user={this.state} />}>
             </Route>
-            
           </Switch>       
       </div>
     )
