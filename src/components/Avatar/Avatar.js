@@ -12,7 +12,7 @@ class Avatar extends Component {
     pseudo : '',
     avatar : '',
     id : '',
-    isdrawer: false,
+    isDrawer: false,
     }   
 
     
@@ -54,8 +54,15 @@ class Avatar extends Component {
             <ChoseImages fctChoseImage = {this.props.selectImageAvatar}/>
             <NameAvatar fctNameAvatar = {this.props.selectNameAvatar}/>
             {this.props.pseudo && this.props.avatar ?
-            <div className="navAvatarPageDiv"><NavLink onClick={(event) => this.props.selectIdAvatar(event)/*à confirmer si je peux le mettre en fonciton ou pas*/} className="navAvatarPageLink" activeClassName="active" to="Game" >Play</NavLink></div> :
-              false}
+            <div className="navAvatarPageDiv">
+              <NavLink  onClick={(event) => this.props.selectIdAvatar(event)/*à confirmer si je peux le mettre en fonciton ou pas*/} 
+                        className="navAvatarPageLink" 
+                        activeClassName="active" 
+                        to={this.props.isDrawer?'/GameDrawer':'/GameGuesser'} >
+                Play
+              </NavLink>
+            </div> :
+            false}
           </div>
           </div>
     );

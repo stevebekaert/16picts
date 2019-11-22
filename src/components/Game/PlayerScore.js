@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './PlayerScore.css';
+import './Game.css';
 
 
 class PlayerScore extends Component {
