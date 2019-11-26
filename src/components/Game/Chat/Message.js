@@ -1,10 +1,5 @@
 import React from 'react';
-
 class Message extends React.Component {
-    componentDidUpdate() {
-        this.newData.scrollIntoView({ behavior: "smooth" })
-    }
-
     isSameSender = () => {
         if (this.props.sender === this.props.currentPlayer.pseudo) {
         return true
@@ -12,7 +7,6 @@ class Message extends React.Component {
         return false
         }
     }
-
     render = () => {
         let styles = {
             wordBreak: "break-all",
@@ -24,7 +18,7 @@ class Message extends React.Component {
             alignSelf: this.isSameSender() ? "start" : "end"
             }
         return (
-            <div className="each-message" ref={(ref) => this.newData = ref}
+            <div className="each-message"
                 style={{display:"flex",
                         flexDirection: "column"
                         }}>

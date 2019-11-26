@@ -20,6 +20,7 @@ class Header extends Component{
                 <ul className="buttonPlayAndJoinGameUl">
                     <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="Avatar" >Play</NavLink></li>
                     <li className="navHomePageLi"><NavLink onClick={() => this.props.selectRuler()} className="navHomePageLink" activeClassName="active" to="Avatar">Create game</NavLink></li>
+                    <li className="navHomePageLi"><NavLink className="navHomePageLink" activeClassName="active" to="Feuille1">Présentation</NavLink></li>
                 </ul>
                 </div>   
             </div>         

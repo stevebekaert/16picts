@@ -10,7 +10,6 @@ import socketIOClient from 'socket.io-client'
 
 /*import PlayerSelection from '../components/PlayerSelection/PlayerSelection.js'*/
 
-
 class Game extends Component {
 
   constructor(props) {
